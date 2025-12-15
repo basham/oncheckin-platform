@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg">
+  <symbol id="check" viewBox="0 0 16 16">
+    <polyline points="3 9 6 12 13 5"/>
+  </symbol>
+  <symbol id="close" viewBox="0 0 16 16">
+    <line x1="3" y1="3" x2="13" y2="13"/>
+    <line x1="13" y1="3" x2="3" y2="13"/>
+  </symbol>
+</svg>

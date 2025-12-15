@@ -1,0 +1,9 @@
+*.log
+.DS_Store
+data
+dev-dist
+dist
+npm-debug.log*
+node_modules
+package-lock.json
+radata

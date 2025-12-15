@@ -1,0 +1,18 @@
+app = 'oncheckin-sync'
+primary_region = 'ord'
+
+[build]
+  image = "ghcr.io/automerge/automerge-repo-sync-server:main"
+
+[http_service]
+  internal_port = 3030
+  force_https = true
+  auto_stop_machines = 'stop'
+  auto_start_machines = true
+  min_machines_running = 0
+  processes = ['app']
+
+[[vm]]
+  memory = '256mb'
+  cpu_kind = 'shared'
+  cpus = 1
