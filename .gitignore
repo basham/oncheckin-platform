@@ -1,5 +1,6 @@
 *.log
 .DS_Store
+config
 data
 dev-dist
 dist

@@ -1,5 +1,5 @@
 {
-  "name": "oncheckin-client-yjs",
+  "name": "@oncheckin/client",
   "version": "1.0.0",
   "description": "Persistent online peer and backup for Yjs docs.",
   "type": "module",

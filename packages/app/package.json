@@ -1,5 +1,5 @@
 {
-	"name": "oncheckin-app",
+	"name": "@oncheckin/app",
 	"version": "1.0.0",
 	"description": "Membership and event management software for Hash House Harriers.",
 	"main": "index.js",
