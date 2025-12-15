@@ -2,6 +2,16 @@ import path from 'path';
 import { svelte } from '@sveltejs/vite-plugin-svelte';
 import { defineConfig } from 'vite';
 import { VitePWA } from 'vite-plugin-pwa';
+import { viteStaticCopy } from 'vite-plugin-static-copy';
+
+const copyConfig = {
+	targets: [
+		{
+			src: 'node_modules/@oncheckin/assets/logo.svg',
+			dest: '.'
+		}
+	]
+};
 
 export default defineConfig({
 	build: {
@@ -20,6 +30,13 @@ export default defineConfig({
 		svelte({
 			emitCss: false
 		}),
+		// Copy logo to generate PWA Assets.
+		viteStaticCopy({
+			...copyConfig,
+			hook: 'buildStart'
+		}),
+		// Rollup deletes logo, so copy it again once it is done.
+		viteStaticCopy(copyConfig),
 		VitePWA({
 			devOptions: {
 				enabled: true,
@@ -39,21 +56,9 @@ export default defineConfig({
 				background_color: '#1a1510', // base-20
 				theme_color: '#52453a', // base-40
 				orientation: 'portrait',
-				icons: [
-					{
-						src: 'icon-192.png',
-						type: 'image/png',
-						sizes: '192x192'
-					},
-					{
-						src: 'icon-512.png',
-						type: 'image/png',
-						sizes: '512x512'
-					},
-					{
-						src: 'icon.svg'
-					}
-				]
+			},
+			pwaAssets: {
+				config: 'pwa-assets.config.js'
 			},
 			srcDir: 'src',
 			strategies: 'injectManifest',

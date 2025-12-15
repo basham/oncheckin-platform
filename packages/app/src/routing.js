@@ -1,3 +1,5 @@
+import styleUrl from '@oncheckin/assets/style.css?url';
+
 import { registerRoute as originalRegisterRoute } from 'workbox-routing';
 import {
 	getAccount,
@@ -162,7 +164,7 @@ function respondWithTemplate(data) {
 		<meta name="msapplication-starturl" content="/">
 		<meta name="theme-color" content="#190f05">
 		<link rel="manifest" href="/manifest.webmanifest">
-		<link rel="stylesheet" href="/style.css">
+		<link rel="stylesheet" href="${styleUrl}">
 		<link rel="icon" href="/icon.svg" type="image/svg+xml">
 		<link rel="apple-touch-icon" href="/icon-192.png">
 		<link rel="preload" as="image" href="/icon.svg">

@@ -1,43 +1,89 @@
 ---
-
+import "@oncheckin/assets/style.css";
+import iconSVG from "@oncheckin/assets/logo.svg?url";
 ---
 
 <html lang="en">
 	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="viewport" content="width=device-width" />
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta
+			name="description"
+			content="Membership and event management software for Hash House Harriers."
+		>
 		<title>OnCheckIn</title>
+		<link rel="icon preload" href={iconSVG} type="image/svg+xml" as="image">
 	</head>
 	<body>
-		<h1>Membership management for Hash&nbsp;House&nbsp;Harrier kennels</h1>
-		<ul class="list u-m-top-6">
-			<li>
-				<strong>Attendance:</strong>
-				Check in hashers to events, with the app or a printable roster.
-			</li>
-			<li>
-				<strong>Reports:</strong>
-				Get summaries of individual events or yearly totals.
-			</li>
-			<li>
-				<strong>Offline first:</strong>
-				The app works in your desktop and mobile browser. It works offline, so if there
-				is no network connectivity, you have no limits.
-			</li>
-			<li>
-				<strong>You manage your own data:</strong>
-				There is no global database. Your data is independent from everyone else's.
-				Easily set up free servers to host your data in a few minutes.
-			</li>
-			<li>
-				<strong>Free:</strong>
-				OnCheckIn is free to use, but we recommend donating to us, if you find this
-				software helpful. Contact us if you'd like to suggest or sponsor certain features.
-			</li>
-		</ul>
-		<p class="u-m-top-6">
-			<a class="button button--primary" href="/start/">Get started</a>
-		</p>
+		<div class="layout">
+			<header>
+				<img alt="" src={iconSVG} />
+				<a href="/">OnCheckIn</a>
+			</header>
+			<main>
+				<h1>Membership management for Hash&nbsp;House&nbsp;Harrier kennels</h1>
+				<ul class="list u-m-top-6">
+					<li>
+						<strong>Attendance:</strong>
+						Check in hashers to events, with the app or a printable roster.
+					</li>
+					<li>
+						<strong>Reports:</strong>
+						Get summaries of individual events or yearly totals.
+					</li>
+					<li>
+						<strong>Offline first:</strong>
+						The app works in your desktop and mobile browser. It works offline, so if there
+						is no network connectivity, you have no limits.
+					</li>
+					<li>
+						<strong>You manage your own data:</strong>
+						There is no global database. Your data is independent from everyone else's.
+						Easily set up free servers to host your data in a few minutes.
+					</li>
+					<li>
+						<strong>Free:</strong>
+						OnCheckIn is free to use, but we recommend donating to us, if you find this
+						software helpful. Contact us if you'd like to suggest or sponsor certain features.
+					</li>
+				</ul>
+				<p class="u-m-top-6">
+					<a class="button button--primary" href="https://app.oncheck.in">Get started</a>
+				</p>
+			</main>
+		</div>
 	</body>
 </html>
+
+<style>
+	.layout {
+		margin: 0 auto;
+		max-width: 30rem;
+		padding: var(--size-8);
+	}
+
+	header {
+		align-items: center;
+		display: flex;
+		font-size: var(--fs-4);
+		gap: var(--size-3);
+	}
+
+	header > img {
+		--size: 3rem;
+		height: var(--size);
+		width: var(--size);
+	}
+
+	header > a {
+		text-decoration: none;
+	}
+
+	header > a:hover {
+		text-decoration: underline;
+	}
+
+	main {
+		padding-top: var(--size-8);
+	}
+</style>

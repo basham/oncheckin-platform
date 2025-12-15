@@ -9,7 +9,7 @@
 <Layout>
 	<div class="layout">
 		<header>
-			<img alt="" src="/icon.svg" />
+			<img alt="" src="/logo.svg" />
 			<a href="/">{APP_NAME}</a>
 		</header>
 		<main>

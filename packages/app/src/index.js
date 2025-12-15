@@ -1,5 +1,6 @@
 import { mount } from 'svelte';
 import { registerSW } from 'virtual:pwa-register';
+import '@oncheckin/assets/style.css';
 
 // Export this, so then `upgrader.svelte` can import it.
 // This is an ugly solution to prevent a circular dependency.

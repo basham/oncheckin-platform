@@ -24,7 +24,7 @@
 		<div class="layout-content">
 			<div class="header">
 				<a class="logo-link" href="/orgs">
-					<img alt={APP_NAME} class="logo" src="/icon.svg" />
+					<img alt={APP_NAME} class="logo" src="/logo.svg" />
 				</a>
 				<span class="u-flex-grow">
 					<a class="org-link u-text-bold" href={org.url}>{org.name}</a>

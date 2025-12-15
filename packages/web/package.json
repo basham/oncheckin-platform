@@ -1,14 +1,15 @@
 {
-  "name": "@oncheckin/web",
-  "type": "module",
-  "version": "0.0.1",
-  "scripts": {
-    "dev": "astro dev --open",
-    "build": "astro build",
-    "preview": "astro preview",
-    "astro": "astro"
-  },
-  "dependencies": {
-    "astro": "5.16.5"
-  }
+	"name": "@oncheckin/web",
+	"type": "module",
+	"version": "0.0.1",
+	"scripts": {
+		"dev": "astro dev --open",
+		"build": "astro build",
+		"preview": "astro preview --open",
+		"astro": "astro"
+	},
+	"dependencies": {
+		"@oncheckin/assets": "workspace:",
+		"astro": "5.16.5"
+	}
 }
