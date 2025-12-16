@@ -11,6 +11,3 @@ radata
 
 npm-debug.log*
 package-lock.json
-**/public/*.ico
-**/public/*.png
-**/public/logo.svg
