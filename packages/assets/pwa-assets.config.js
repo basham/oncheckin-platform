@@ -6,9 +6,6 @@ import {
 const resizeOptions = { background: "#190f05" };
 
 export default defineConfig({
-	headLinkOptions: {
-		preset: '2023'
-	},
 	preset: {
 		...preset,
 		maskable: {

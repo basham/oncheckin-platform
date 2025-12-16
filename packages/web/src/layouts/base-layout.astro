@@ -1,6 +1,8 @@
 ---
 import "@oncheckin/assets/style.css";
-import iconSVG from "@oncheckin/assets/logo.svg?url";
+import favicon from "@oncheckin/assets/dist/favicon.ico";
+import logo from "@oncheckin/assets/dist/logo.svg?url";
+import appleTouchIcon from "@oncheckin/assets/dist/apple-touch-icon-180x180.png?url";
 ---
 
 <html lang="en">
@@ -12,7 +14,9 @@ import iconSVG from "@oncheckin/assets/logo.svg?url";
 			content="Membership and event management software for Hash House Harriers."
 		>
 		<title>OnCheckIn</title>
-		<link rel="icon preload" href={iconSVG} type="image/svg+xml" as="image">
+		<link rel="icon" href={favicon} sizes="48x48">
+		<link rel="icon" href={logo} sizes="any" type="image/svg+xml">
+		<link rel="apple-touch-icon" href={appleTouchIcon}>
 	</head>
 	<body>
 		<slot />

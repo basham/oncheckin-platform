@@ -4,8 +4,10 @@
 	"private": true,
 	"description": "",
 	"scripts": {
-		"start": "pnpm --filter app start",
-		"start:web": "pnpm --filter web dev"
+		"dev:app": "pnpm --filter app... dev",
+		"dev:web": "pnpm --filter web... dev",
+		"build:app": "pnpm --filter app... build",
+		"build:web": "pnpm --filter web... build"
 	},
 	"keywords": [],
 	"repository": {
