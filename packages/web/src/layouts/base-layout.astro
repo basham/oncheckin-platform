@@ -1,0 +1,20 @@
+---
+import "@oncheckin/assets/style.css";
+import iconSVG from "@oncheckin/assets/logo.svg?url";
+---
+
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta
+			name="description"
+			content="Membership and event management software for Hash House Harriers."
+		>
+		<title>OnCheckIn</title>
+		<link rel="icon preload" href={iconSVG} type="image/svg+xml" as="image">
+	</head>
+	<body>
+		<slot />
+	</body>
+</html>

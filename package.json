@@ -1,14 +1,22 @@
 {
-  "name": "oncheckin-platform",
-  "version": "1.0.0",
-  "private": true,
-  "description": "",
-  "scripts": {
-    "start": "pnpm --filter app start",
-    "start:web": "pnpm --filter web dev"
-  },
-  "keywords": [],
-  "author": "Chris Basham <chris@bash.am>",
-  "license": "MIT",
-  "packageManager": "pnpm@10.25.0"
+	"name": "oncheckin-platform",
+	"version": "1.0.0",
+	"private": true,
+	"description": "",
+	"scripts": {
+		"start": "pnpm --filter app start",
+		"start:web": "pnpm --filter web dev"
+	},
+	"keywords": [],
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/basham/oncheckin-platform.git"
+	},
+	"bugs": {
+		"url": "https://github.com/basham/oncheckin-platform/issues"
+	},
+	"homepage": "https://github.com/basham/oncheckin-platform#readme",
+	"author": "Chris Basham <chris@bash.am>",
+	"license": "MIT",
+	"packageManager": "pnpm@10.25.0"
 }
