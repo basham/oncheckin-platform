@@ -12,10 +12,10 @@
 		score = () => 1,
 	} = $props();
 
-	const inputId = `${id}-input`;
-	const labelId = `${id}-label`;
-	const listboxId = `${id}-listbox`;
-	const optionId = `${id}-option`;
+	const inputId = $derived(`${id}-input`);
+	const labelId = $derived(`${id}-label`);
+	const listboxId = $derived(`${id}-listbox`);
+	const optionId = $derived(`${id}-option`);
 	const maxResults = 10;
 
 	let query = $state("");
