@@ -1,7 +1,7 @@
 <script>
-	import { h1, participants } from '@src/data.js';
-	import Layout from '@src/pages/orgs/$org/layout.svelte';
-	import { pluralize, sortAsc, sortDesc } from '@src/util.js'
+	import { h1, participants } from "@src/data.js";
+	import Layout from "@src/pages/orgs/$org/layout.svelte";
+	import { pluralize, sortAsc, sortDesc } from "@src/util.js";
 
 	const ATTENDS_MIN = 4;
 
@@ -12,8 +12,8 @@
 			return { ...p, sortValue };
 		})
 		.sort((a, b) => {
-			const sortValue = sortAsc('sortValue')(a, b);
-			const attendsCount = sortDesc('attendsCount')(a, b);
+			const sortValue = sortAsc("sortValue")(a, b);
+			const attendsCount = sortDesc("attendsCount")(a, b);
 			return sortValue === 0 ? attendsCount : sortValue;
 		});
 </script>
@@ -22,10 +22,12 @@
 	<div>
 		<h1>{h1}</h1>
 	</div>
-	<h2 class="u-text-normal u-ts-1">{results.length} {pluralize(results.length, 'hasher')} ran at least {ATTENDS_MIN} times in the last year</h2>
-	<h3 class="h2">
-		Hares / Runs
-	</h3>
+	<h2 class="u-text-normal u-ts-1">
+		{results.length}
+		{pluralize(results.length, "hasher")} ran at least {ATTENDS_MIN} times in the
+		last year
+	</h2>
+	<h3 class="h2">Hares / Runs</h3>
 	<ul class="list-plain u-gap-2px u-m-top-2">
 		{#each results as p}
 			<li class="row">

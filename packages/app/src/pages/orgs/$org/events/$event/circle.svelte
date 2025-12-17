@@ -1,16 +1,16 @@
 <script>
-	import { checkIns } from '@src/data.js';
-	import { sortAsc, sortDesc } from '@src/util.js';
-	import CheckInList from '@src/lib/list-check-in.svelte';
-	import Layout from './layout.svelte';
+	import { checkIns } from "@src/data.js";
+	import { sortAsc, sortDesc } from "@src/util.js";
+	import CheckInList from "@src/lib/list-check-in.svelte";
+	import Layout from "./layout.svelte";
 
 	const hosts = checkIns.filter(({ host }) => host);
 	const specialHosts = hosts
 		.filter(({ specialHostCount }) => specialHostCount)
-		.sort(sortAsc('hostCount'));
+		.sort(sortAsc("hostCount"));
 	const specialRuns = checkIns
 		.filter(({ specialRunCount }) => specialRunCount)
-		.sort(sortAsc('runCount'));
+		.sort(sortAsc("runCount"));
 	const virgins = checkIns.filter(({ runCount }) => runCount === 1);
 	const namings = checkIns.filter(({ readyForNaming }) => readyForNaming);
 	const returners = checkIns

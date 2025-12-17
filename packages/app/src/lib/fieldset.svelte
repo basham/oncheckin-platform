@@ -1,9 +1,5 @@
 <script>
-	let {
-		children,
-		class: _class,
-		legend = ''
-	} = $props();
+	let { children, class: _class, legend = "" } = $props();
 </script>
 
 <div class={`card u-m-top-4 ${_class}`}>

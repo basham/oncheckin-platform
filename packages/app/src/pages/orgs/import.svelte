@@ -1,5 +1,5 @@
 <script>
-	import Layout from '@src/pages/layout.svelte';
+	import Layout from "@src/pages/layout.svelte";
 
 	let files = $state();
 	let isSubmitting = false;
@@ -16,7 +16,7 @@
 		reader.onload = async (e) => {
 			const res = await fetch(window.location.pathname, {
 				body: e.target.result,
-				method: 'post',
+				method: "post",
 			});
 			window.location = res.url;
 		};

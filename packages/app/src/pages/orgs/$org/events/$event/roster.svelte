@@ -1,7 +1,7 @@
 <script>
-	import { event, returnersCutoff, participants } from '@src/data.js';
-	import Icon from '@src/lib/icon.svelte';
-	import Layout from '@src/pages/page.svelte';
+	import { event, returnersCutoff, participants } from "@src/data.js";
+	import Icon from "@src/lib/icon.svelte";
+	import Layout from "@src/pages/page.svelte";
 </script>
 
 <Layout>
@@ -40,8 +40,9 @@
 						</td>
 						<td
 							class="u-text-num u-text-right"
-							class:highlight={p.specialHostCount}>
-							{p.hostCount > 0 ? p.hostCount : ''}
+							class:highlight={p.specialHostCount}
+						>
+							{p.hostCount > 0 ? p.hostCount : ""}
 						</td>
 						<td
 							class="u-text-num u-text-right"

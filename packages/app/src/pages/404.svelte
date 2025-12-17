@@ -1,6 +1,6 @@
 <script>
-	import { h1 } from '@src/data.js';
-	import Layout from './page.svelte';
+	import { h1 } from "@src/data.js";
+	import Layout from "./page.svelte";
 </script>
 
 <Layout>

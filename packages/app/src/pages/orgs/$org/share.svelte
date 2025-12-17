@@ -1,17 +1,17 @@
 <script>
-	import { h1, org } from '@src/data.js';
-	import Layout from '@src/pages/orgs/$org/layout.svelte';
-	import QRCode from '@src/lib/qr-code.svelte';
-	import Toast from '@src/lib/toast.svelte';
+	import { h1, org } from "@src/data.js";
+	import Layout from "@src/pages/orgs/$org/layout.svelte";
+	import QRCode from "@src/lib/qr-code.svelte";
+	import Toast from "@src/lib/toast.svelte";
 
 	let toast = $state();
 
 	function copyShareLink(event) {
-		const text = document.getElementById('invite-code-input');
+		const text = document.getElementById("invite-code-input");
 		text.select();
-		document.execCommand('copy');
+		document.execCommand("copy");
 		event.target.focus();
-		toast.dispatch('Copied invite code');
+		toast.dispatch("Copied invite code");
 	}
 </script>
 

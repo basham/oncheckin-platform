@@ -1,6 +1,6 @@
 <script>
-	import { device, account, orgs } from '@src/data.js';
-	import Layout from '@src/pages/layout.svelte';
+	import { device, account, orgs } from "@src/data.js";
+	import Layout from "@src/pages/layout.svelte";
 </script>
 
 <Layout>

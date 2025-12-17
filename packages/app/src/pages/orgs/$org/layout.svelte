@@ -1,22 +1,22 @@
 <script>
-	import { route, org } from '@src/data.js';
-	import { APP_NAME } from '@src/constants.js';
-	import NavLink from '@src/lib/nav-link.svelte';
-	import Layout from '@src/pages/page.svelte';
+	import { route, org } from "@src/data.js";
+	import { APP_NAME } from "@src/constants.js";
+	import NavLink from "@src/lib/nav-link.svelte";
+	import Layout from "@src/pages/page.svelte";
 
 	let { children } = $props();
-	const location = route.split('/').slice(2).join('/');
+	const location = route.split("/").slice(2).join("/");
 	let awarenessCount = $state(-1);
 	let connected = $derived(awarenessCount === -1 || awarenessCount > 1);
 
 	const bc = new BroadcastChannel(`bc-${org.id}`);
 	bc.onmessage = (event) => {
 		const [type, data] = event.data;
-		if (type === 'count') {
+		if (type === "count") {
 			awarenessCount = data;
 		}
 	};
-	bc.postMessage(['getCount']);
+	bc.postMessage(["getCount"]);
 </script>
 
 <Layout>
@@ -33,7 +33,10 @@
 						<span class="u-sr-only">(disconnected)</span>
 					</span>
 				</span>
-				<nav aria-label="Organization" class="list-plain list-plain--inline u-gap-4">
+				<nav
+					aria-label="Organization"
+					class="list-plain list-plain--inline u-gap-4"
+				>
 					<NavLink href={org.url} id="events" {location}>Events</NavLink>
 					<NavLink
 						href={`${org.url}participants/`}

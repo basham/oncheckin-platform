@@ -1,7 +1,7 @@
 <script>
-	import { checkInsByYear } from '@src/data.js';
-	import { pluralize } from '@src/util.js';
-	import Layout from './layout.svelte';
+	import { checkInsByYear } from "@src/data.js";
+	import { pluralize } from "@src/util.js";
+	import Layout from "./layout.svelte";
 </script>
 
 <Layout>
@@ -22,7 +22,7 @@
 							{`#${checkIn.event.count}: ${checkIn.event.displayDateMedium}`}
 						</span>
 						<span class="row__tertiary u-text-num">
-							{`${checkIn.runCount} ${pluralize(checkIn.runCount, 'run')}`}
+							{`${checkIn.runCount} ${pluralize(checkIn.runCount, "run")}`}
 						</span>
 					</a>
 				</li>

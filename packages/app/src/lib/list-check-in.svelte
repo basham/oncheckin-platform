@@ -1,11 +1,11 @@
 <script>
-	import { pluralize } from '@src/util.js';
+	import { pluralize } from "@src/util.js";
 
 	let {
 		checkIns = [],
 		showCheckInCount = false,
 		showHostCount = false,
-		showLastEventDate = false
+		showLastEventDate = false,
 	} = $props();
 </script>
 
@@ -19,15 +19,15 @@
 					<span class="row__tertiary u-right u-text-num">
 						{#if showHostCount && checkIn.host}
 							<span class="u-block">
-								{`${checkIn.hostCount || '?'} ${pluralize(
+								{`${checkIn.hostCount || "?"} ${pluralize(
 									checkIn.hostCount,
-									'hare'
+									"hare",
 								)}`}
 							</span>
 						{/if}
 						{#if showCheckInCount}
 							<span class="u-block">
-								{`${checkIn.runCount || '?'} ${pluralize(checkIn.runCount, 'run')}`}
+								{`${checkIn.runCount || "?"} ${pluralize(checkIn.runCount, "run")}`}
 							</span>
 						{/if}
 						{#if showLastEventDate}

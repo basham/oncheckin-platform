@@ -1,5 +1,5 @@
 <script>
-	let { fullName = '', alias = '' } = $props();
+	let { fullName = "", alias = "" } = $props();
 </script>
 
 <div class="u-m-top-4">

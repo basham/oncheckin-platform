@@ -1,15 +1,15 @@
 <script>
-	import Icon from './icon.svelte';
+	import Icon from "./icon.svelte";
 
 	let {
 		class: _class,
-		id = 'lookup',
+		id = "lookup",
 		isSelected = () => false,
-		label = '',
+		label = "",
 		onSelected = () => {},
 		options = [],
 		render = () => {},
-		score = () => 1
+		score = () => 1,
 	} = $props();
 
 	const inputId = `${id}-input`;
@@ -18,7 +18,7 @@
 	const optionId = `${id}-option`;
 	const maxResults = 10;
 
-	let query = $state('');
+	let query = $state("");
 	let results = $state([]);
 	let selectedIndex = $state(0);
 	let resultsCount = $derived(results.length);
@@ -40,20 +40,20 @@
 		const i = selectedIndex;
 		const lastIndex = resultsCount - 1;
 		switch (key) {
-			case 'ArrowDown':
+			case "ArrowDown":
 				event.preventDefault();
 				selectedIndex = i === lastIndex ? 0 : i + 1;
 				return;
-			case 'ArrowUp':
+			case "ArrowUp":
 				event.preventDefault();
 				selectedIndex = i === 0 ? lastIndex : i - 1;
 				return;
-			case 'Enter':
+			case "Enter":
 				event.preventDefault();
 				select();
 				return;
-			case 'Escape':
-				query = '';
+			case "Escape":
+				query = "";
 				return;
 		}
 	}
@@ -69,7 +69,7 @@
 	function select() {
 		if (results.length > 0) {
 			onSelected(results[selectedIndex]);
-			query = '';
+			query = "";
 		}
 	}
 </script>
@@ -145,7 +145,7 @@
 		padding: var(--size-1) var(--size-8) var(--size-1) var(--size-2);
 	}
 
-	.option[aria-selected='true'] {
+	.option[aria-selected="true"] {
 		background-color: var(--color-p-7);
 		border-radius: var(--size-1);
 		color: var(--color-p-0);

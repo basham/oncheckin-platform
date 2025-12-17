@@ -1,7 +1,7 @@
 <script>
-	import { event, hares, runners } from '@src/data.js';
-	import CheckInList from '@src/lib/list-check-in.svelte';
-	import Layout from './layout.svelte';
+	import { event, hares, runners } from "@src/data.js";
+	import CheckInList from "@src/lib/list-check-in.svelte";
+	import Layout from "./layout.svelte";
 </script>
 
 <Layout>

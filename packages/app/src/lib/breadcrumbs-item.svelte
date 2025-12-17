@@ -1,5 +1,5 @@
 <script>
-	let { href = './', isCurrent = false, children } = $props();
+	let { href = "./", isCurrent = false, children } = $props();
 </script>
 
 {#if isCurrent}
@@ -20,7 +20,7 @@
 	}
 
 	li:not(:last-child)::after {
-		content: '/';
+		content: "/";
 		padding: 0 var(--size-2);
 	}
 </style>

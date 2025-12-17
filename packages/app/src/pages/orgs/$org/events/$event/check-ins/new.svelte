@@ -1,43 +1,42 @@
 <script>
-	import StringComparison from 'hermetrics/dist/hermetrics/jaro_winkler.js'
-	import { h2, event, participants } from '@src/data.js';
-	import { focus } from '@src/util.js';
-	import Fieldset from '@src/lib/fieldset.svelte';
-	import FieldsetCheckIn from '@src/lib/fieldset-check-in.svelte';
-	import FieldsetParticipantName from '@src/lib/fieldset-participant-name.svelte';
-	import Icon from '@src/lib/icon.svelte';
-	import Lookup from '@src/lib/lookup.svelte';
-	import RadioGroup from '@src/lib/radio-group.svelte';
-	import Layout from '../layout.svelte';
+	import StringComparison from "hermetrics/dist/hermetrics/jaro_winkler.js";
+	import { h2, event, participants } from "@src/data.js";
+	import { focus } from "@src/util.js";
+	import Fieldset from "@src/lib/fieldset.svelte";
+	import FieldsetCheckIn from "@src/lib/fieldset-check-in.svelte";
+	import FieldsetParticipantName from "@src/lib/fieldset-participant-name.svelte";
+	import Icon from "@src/lib/icon.svelte";
+	import Lookup from "@src/lib/lookup.svelte";
+	import RadioGroup from "@src/lib/radio-group.svelte";
+	import Layout from "../layout.svelte";
 
-	let checkInType = $state('existing-participant');
+	let checkInType = $state("existing-participant");
 	let selectedParticipant = $state(null);
 
 	const compare = new StringComparison();
 
-	const presortedParticipants = [...participants]
-		.sort((a, b) => {
-			const aSort = a.latestCheckIn?.event.dateObj
-			const bSort = b.latestCheckIn?.event.dateObj
-			if (aSort === undefined) {
-				return -1;
-			}
-			return bSort > aSort ? 1 : bSort < aSort ? -1 : 0
-		});
+	const presortedParticipants = [...participants].sort((a, b) => {
+		const aSort = a.latestCheckIn?.event.dateObj;
+		const bSort = b.latestCheckIn?.event.dateObj;
+		if (aSort === undefined) {
+			return -1;
+		}
+		return bSort > aSort ? 1 : bSort < aSort ? -1 : 0;
+	});
 
 	function scoreResult(query, participant) {
 		const terms = [participant.fullName, participant.displayName]
-			.join(' ')
-			.split(' ')
-			.filter((t) => t !== '(Participant)')
+			.join(" ")
+			.split(" ")
+			.filter((t) => t !== "(Participant)")
 			.map((t) => t.toLowerCase());
 		const uniqueTerms = [...new Set(terms)];
 		const score = query
-			.split(' ')
+			.split(" ")
 			.map((q) => q.toLowerCase())
 			.map((q) => Math.max(...uniqueTerms.map((t) => compare.similarity(q, t))))
 			.reduce((total, s) => total + s);
-		return score
+		return score;
 	}
 
 	function renderParticipantOption(participant) {
@@ -45,10 +44,10 @@
 		if (!alias) {
 			return fullName;
 		}
-		if (fullName === '(Participant)') {
+		if (fullName === "(Participant)") {
 			return alias;
 		}
-		return `${displayName} (${fullName})`
+		return `${displayName} (${fullName})`;
 	}
 
 	function selectParticipant(participant) {
@@ -58,18 +57,18 @@
 		}
 
 		selectedParticipant = participant;
-		focus('unselect-participant');
+		focus("unselect-participant");
 	}
 
 	function unselectParticipant() {
 		selectedParticipant = null;
-		focus('find-participant-input');
+		focus("find-participant-input");
 	}
 
 	function submit(e) {
-		if (!selectedParticipant && checkInType === 'existing-participant') {
+		if (!selectedParticipant && checkInType === "existing-participant") {
 			e.preventDefault();
-			focus('find-participant-input');
+			focus("find-participant-input");
 		}
 	}
 </script>
@@ -81,9 +80,9 @@
 			bind:value={checkInType}
 			legend="Check in"
 			name="checkInType"
-			options={['Existing participant', 'New participant']}
+			options={["Existing participant", "New participant"]}
 		/>
-		{#if checkInType === 'existing-participant'}
+		{#if checkInType === "existing-participant"}
 			{#if !selectedParticipant}
 				<Fieldset>
 					<Lookup
@@ -123,7 +122,7 @@
 				</Fieldset>
 			{/if}
 		{/if}
-		{#if checkInType === 'new-participant'}
+		{#if checkInType === "new-participant"}
 			<Fieldset legend="New participant">
 				<div class="u-m-top-4">
 					<FieldsetParticipantName />

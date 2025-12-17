@@ -1,13 +1,8 @@
 <script>
-	let {
-		href,
-		id = null,
-		location = null,
-		children
-	} = $props();
+	let { href, id = null, location = null, children } = $props();
 </script>
 
-<a aria-current={location === id ? 'page' : null} {href}>
+<a aria-current={location === id ? "page" : null} {href}>
 	{@render children?.()}
 </a>
 

@@ -5,23 +5,27 @@
 		eventsWithFewestParticipants,
 		eventsWithMostParticipants,
 		participantsWithMostAttendances,
-		participantsWithMostOrganizes
-	} from '@src/data.js';
-	import Layout from '@src/pages/orgs/$org/layout.svelte';
-	import Events from '@src/lib/events.svelte';
-	import Participants from '@src/lib/participants.svelte';
+		participantsWithMostOrganizes,
+	} from "@src/data.js";
+	import Layout from "@src/pages/orgs/$org/layout.svelte";
+	import Events from "@src/lib/events.svelte";
+	import Participants from "@src/lib/participants.svelte";
 </script>
 
 <Layout location="events">
 	<h1>{h1}</h1>
 	<h2>
-		Most participants <span class="badge">{eventsWithMostParticipants.count}</span>
+		Most participants <span class="badge"
+			>{eventsWithMostParticipants.count}</span
+		>
 	</h2>
 	<div class="u-m-top-2">
 		<Events events={eventsWithMostParticipants.events} />
 	</div>
 	<h2>
-		Fewest participants <span class="badge">{eventsWithFewestParticipants.count}</span>
+		Fewest participants <span class="badge"
+			>{eventsWithFewestParticipants.count}</span
+		>
 	</h2>
 	<div class="u-m-top-2">
 		<Events events={eventsWithFewestParticipants.events} />

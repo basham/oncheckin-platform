@@ -1,19 +1,19 @@
 <script>
-	import { h1, org, params, participants } from '@src/data.js';
-	import Layout from '@src/pages/orgs/$org/layout.svelte';
-	import Participants from '@src/lib/participants.svelte';
-	import Icon from '@src/lib/icon.svelte';
-	import { pluralize, sortDesc } from '@src/util.js'
+	import { h1, org, params, participants } from "@src/data.js";
+	import Layout from "@src/pages/orgs/$org/layout.svelte";
+	import Participants from "@src/lib/participants.svelte";
+	import Icon from "@src/lib/icon.svelte";
+	import { pluralize, sortDesc } from "@src/util.js";
 
 	const location = document.location.toString();
 	const filters = [
-		['Named', 'named', 'true'],
-		['Not named', 'named', 'false'],
-		['Ready for name', 'named', 'ready'],
-		['By last event', 'sort', 'event'],
-		['By hashes', 'sort', 'runs'],
-		['By hares', 'sort', 'hosts'],
-		['By name', 'sort', 'name']
+		["Named", "named", "true"],
+		["Not named", "named", "false"],
+		["Ready for name", "named", "ready"],
+		["By last event", "sort", "event"],
+		["By hashes", "sort", "runs"],
+		["By hares", "sort", "hosts"],
+		["By name", "sort", "name"],
 	].map(([label, key, value]) => {
 		const { searchParams } = new URL(location);
 		const active = params[key] === value;
@@ -30,11 +30,11 @@
 		event: sortByEvent,
 		runs: sortByRunCount,
 		hosts: sortByHostCount,
-		name: sortByName
+		name: sortByName,
 	};
 	const groups = sortOptions[params.sort]();
 
-	function sortByEvent () {
+	function sortByEvent() {
 		const events = new Map();
 		const groups = new Map();
 		participants.forEach((p) => {
@@ -50,22 +50,20 @@
 			}
 			groups.get(id).add(p);
 		});
-		return [...events.values()]
-			.sort(sortDesc('count'))
-			.map((event) => {
-				const { displayDateLong: name, count, id, url } = event;
-				const description = `#${count}`;
-				const items = [...groups.get(id).values()];
-				return {
-					name,
-					description,
-					url,
-					items
-				};
-			});
+		return [...events.values()].sort(sortDesc("count")).map((event) => {
+			const { displayDateLong: name, count, id, url } = event;
+			const description = `#${count}`;
+			const items = [...groups.get(id).values()];
+			return {
+				name,
+				description,
+				url,
+				items,
+			};
+		});
 	}
 
-	function sortByRunCount () {
+	function sortByRunCount() {
 		const groups = new Map();
 		participants.forEach((p) => {
 			const { runCount } = p;
@@ -82,12 +80,12 @@
 				const items = [...groups.get(runCount).values()];
 				return {
 					name,
-					items
+					items,
 				};
 			});
 	}
 
-	function sortByHostCount () {
+	function sortByHostCount() {
 		const groups = new Map();
 		participants.forEach((p) => {
 			const { hostCount } = p;
@@ -104,31 +102,29 @@
 				const items = [...groups.get(hostCount).values()];
 				return {
 					name,
-					items
+					items,
 				};
 			});
 	}
 
-	function sortByName () {
+	function sortByName() {
 		const groups = new Map();
 		participants.forEach((p) => {
-			const { alias = '', fullName = '' } = p;
+			const { alias = "", fullName = "" } = p;
 			const firstLetter = (alias || fullName)[0]?.toUpperCase();
 			if (!groups.has(firstLetter)) {
 				groups.set(firstLetter, new Set());
 			}
 			groups.get(firstLetter).add(p);
 		});
-		return [...groups.keys()]
-			.sort()
-			.map((firstLetter) => {
-				const name = firstLetter;
-				const items = [...groups.get(firstLetter).values()];
-				return {
-					name,
-					items
-				};
-			});
+		return [...groups.keys()].sort().map((firstLetter) => {
+			const name = firstLetter;
+			const items = [...groups.get(firstLetter).values()];
+			return {
+				name,
+				items,
+			};
+		});
 	}
 </script>
 
@@ -145,9 +141,7 @@
 	<ul class="list-plain u-gap-2px u-m-top-2">
 		<li class="row">
 			<a class="row__content" href="participation">
-				<span class="row__primary">
-					Participation
-				</span>
+				<span class="row__primary"> Participation </span>
 				<span class="row__secondary">
 					Find hashers to hare upcoming events.
 				</span>
@@ -159,7 +153,7 @@
 		{#each filters as filter}
 			<li class="row">
 				<a
-					aria-current={filter.active ? 'true' : null}
+					aria-current={filter.active ? "true" : null}
 					class="row__content"
 					href={`${filter.url}`}
 				>
@@ -174,7 +168,10 @@
 			</li>
 		{/each}
 	</ul>
-	<h2 class="u-text-normal u-ts-1">Showing {participants.length} {pluralize(participants.length, 'result')}</h2>
+	<h2 class="u-text-normal u-ts-1">
+		Showing {participants.length}
+		{pluralize(participants.length, "result")}
+	</h2>
 	{#each groups as group}
 		<h3 class="h2">
 			{group.name}

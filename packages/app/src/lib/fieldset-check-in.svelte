@@ -1,6 +1,6 @@
 <script>
-	import Checkbox from './checkbox.svelte';
-	import Fieldset from './fieldset.svelte';
+	import Checkbox from "./checkbox.svelte";
+	import Fieldset from "./fieldset.svelte";
 
 	let { host = $bindable(false) } = $props();
 </script>

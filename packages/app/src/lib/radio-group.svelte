@@ -1,22 +1,24 @@
 <script>
-	import Fieldset from './fieldset.svelte';
+	import Fieldset from "./fieldset.svelte";
 
 	let {
-		legend = '',
-		name = '',
+		legend = "",
+		name = "",
 		options = [],
-		value = $bindable(null)
+		value = $bindable(null),
 	} = $props();
 
-	let _options = $derived(options.map((label) => {
-		const value = label.toLowerCase().replace(/ /g, '-');
-		return {
-			id: `${name}-${value}-radio`,
-			label,
-			name,
-			value,
-		};
-	}));
+	let _options = $derived(
+		options.map((label) => {
+			const value = label.toLowerCase().replace(/ /g, "-");
+			return {
+				id: `${name}-${value}-radio`,
+				label,
+				name,
+				value,
+			};
+		}),
+	);
 </script>
 
 <Fieldset {legend}>
@@ -43,7 +45,7 @@
 
 <style>
 	ul {
-		list-style-type: '';
+		list-style-type: "";
 	}
 
 	li {
@@ -63,10 +65,11 @@
 		--color-checked: var(--color-b-1);
 		--size: var(--size-6);
 		border-radius: 50%;
-		box-shadow: inset 0 0 0 var(--px-2) var(--color-border),
+		box-shadow:
+			inset 0 0 0 var(--px-2) var(--color-border),
 			inset 0 0 0 calc(var(--size-1) + var(--px-1)) var(--color-background),
 			inset 0 0 0 var(--size-3) var(--color-checked);
-		content: '';
+		content: "";
 		display: inline-block;
 		flex-shrink: 0;
 		height: var(--size);

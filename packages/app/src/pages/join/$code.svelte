@@ -1,15 +1,15 @@
 <script>
-	import { code } from '@src/data.js';
-	import Layout from '@src/pages/layout.svelte';
+	import { code } from "@src/data.js";
+	import Layout from "@src/pages/layout.svelte";
 
 	const { id, name } = code;
 
-	const IDLE = Symbol('idle');
-	const PENDING = Symbol('pending');
+	const IDLE = Symbol("idle");
+	const PENDING = Symbol("pending");
 	let _state = $state(IDLE);
 	let pending = $derived(_state === PENDING);
 
-	function submit () {
+	function submit() {
 		_state = PENDING;
 	}
 </script>
@@ -22,18 +22,10 @@
 			{id}
 		</p>
 	</div>
-	<form
-		class:u-sr-only={pending}
-		method="post"
-		onsubmit={submit}
-	>
+	<form class:u-sr-only={pending} method="post" onsubmit={submit}>
 		<input type="hidden" name="id" value={id} />
 		<div class="u-m-top-6">
-			<button
-				class="button button--primary"
-				disabled={pending}
-				type="submit"
-			>
+			<button class="button button--primary" disabled={pending} type="submit">
 				Join organization
 			</button>
 		</div>

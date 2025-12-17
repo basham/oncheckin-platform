@@ -1,5 +1,5 @@
 <script>
-	import Upgrader from '@src/lib/upgrader.svelte';
+	import Upgrader from "@src/lib/upgrader.svelte";
 
 	let { children } = $props();
 </script>

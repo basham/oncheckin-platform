@@ -1,12 +1,12 @@
 <script>
-	import Icon from './icon.svelte';
+	import Icon from "./icon.svelte";
 
 	let {
 		checked = $bindable(false),
 		class: _class,
-		id = '',
-		label = '',
-		name = ''
+		id = "",
+		label = "",
+		name = "",
 	} = $props();
 </script>
 
@@ -39,7 +39,8 @@
 		align-items: center;
 		background-color: var(--color-checked);
 		border-radius: var(--size-1);
-		box-shadow: inset 0 0 0 var(--px-2) var(--color-border),
+		box-shadow:
+			inset 0 0 0 var(--px-2) var(--color-border),
 			inset 0 0 0 var(--size-1) var(--color-background);
 		color: var(--color-background);
 		display: inline-flex;

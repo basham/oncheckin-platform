@@ -1,5 +1,5 @@
 <script>
-	let { name = '', date = '' } = $props();
+	let { name = "", date = "" } = $props();
 </script>
 
 <div class="u-m-top-4">

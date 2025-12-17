@@ -1,11 +1,11 @@
 <script>
-	import { route, participant, latestCheckIn } from '@src/data.js';
-	import { pluralize } from '@src/util.js';
-	import NavLink from '@src/lib/nav-link.svelte';
-	import Layout from '@src/pages/orgs/$org/layout.svelte';
+	import { route, participant, latestCheckIn } from "@src/data.js";
+	import { pluralize } from "@src/util.js";
+	import NavLink from "@src/lib/nav-link.svelte";
+	import Layout from "@src/pages/orgs/$org/layout.svelte";
 
 	let { children } = $props();
-	const location = route.split('/')[4];
+	const location = route.split("/")[4];
 </script>
 
 <Layout>
@@ -15,13 +15,13 @@
 		{#if latestCheckIn}
 			<span class="u-m-lr-1">&middot;</span>
 			<span>
-				{`${latestCheckIn?.count} ${pluralize(latestCheckIn?.count, 'run')}`}
+				{`${latestCheckIn?.count} ${pluralize(latestCheckIn?.count, "run")}`}
 			</span>
 			<span class="u-m-lr-1">&middot;</span>
 			<span>
 				{`${latestCheckIn?.hostCount} ${pluralize(
 					latestCheckIn?.hostCount,
-					'hare'
+					"hare",
 				)}`}
 			</span>
 		{/if}

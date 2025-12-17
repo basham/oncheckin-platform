@@ -1,5 +1,5 @@
 <script>
-	let { name = '', visible = true } = $props();
+	let { name = "", visible = true } = $props();
 </script>
 
 <svg aria-hidden="true" class:invisible={!visible}>

@@ -1,18 +1,20 @@
 <script>
-	import { SvelteSet } from 'svelte/reactivity';
-	import { runners } from '@src/data.js';
-	import Icon from '@src/lib/icon.svelte';
-	import Layout from './layout.svelte';
+	import { SvelteSet } from "svelte/reactivity";
+	import { runners } from "@src/data.js";
+	import Icon from "@src/lib/icon.svelte";
+	import Layout from "./layout.svelte";
 
 	const runnersMap = new Map(
-		runners.map((checkIn) => [checkIn.participant.id, checkIn])
+		runners.map((checkIn) => [checkIn.participant.id, checkIn]),
 	);
 
 	let arrivedIds = $state(new SvelteSet());
-	let waiting = $derived(runners.filter(
-		({ participant }) => !arrivedIds.has(participant.id)
-	));
-	let arrived = $derived([...arrivedIds].map((id) => runnersMap.get(id)).reverse());
+	let waiting = $derived(
+		runners.filter(({ participant }) => !arrivedIds.has(participant.id)),
+	);
+	let arrived = $derived(
+		[...arrivedIds].map((id) => runnersMap.get(id)).reverse(),
+	);
 
 	function markAsArrived(event) {
 		const { id } = event.target.dataset;

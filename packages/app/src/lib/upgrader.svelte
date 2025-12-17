@@ -1,6 +1,6 @@
 <script>
 	// import { registerSW } from 'virtual:pwa-register';
-	import Icon from './icon.svelte';
+	import Icon from "./icon.svelte";
 
 	const { registerSW } = window;
 

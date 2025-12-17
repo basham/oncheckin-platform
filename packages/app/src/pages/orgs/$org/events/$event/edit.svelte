@@ -1,7 +1,7 @@
 <script>
-	import { h2, event } from '@src/data.js';
-	import FieldsetEvent from '@src/lib/fieldset-event.svelte';
-	import Layout from './layout.svelte';
+	import { h2, event } from "@src/data.js";
+	import FieldsetEvent from "@src/lib/fieldset-event.svelte";
+	import Layout from "./layout.svelte";
 
 	const { name, date } = event;
 </script>

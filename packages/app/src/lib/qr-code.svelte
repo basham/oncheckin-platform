@@ -1,12 +1,12 @@
 <script>
-	import QRious from 'qrious';
-	import { onMount } from 'svelte';
+	import QRious from "qrious";
+	import { onMount } from "svelte";
 
-	let { canvasId = 'qr-code-canvas', code } = $props();
+	let { canvasId = "qr-code-canvas", code } = $props();
 
 	onMount(() => {
 		new QRious({
-			background: '#ffb36a',
+			background: "#ffb36a",
 			element: document.getElementById(canvasId),
 			size: 160,
 			value: code,

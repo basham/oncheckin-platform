@@ -1,6 +1,6 @@
 <script>
-	import { h1, orgEvent } from '@src/data.js';
-	import Layout from '@src/pages/orgs/$org/layout.svelte';
+	import { h1, orgEvent } from "@src/data.js";
+	import Layout from "@src/pages/orgs/$org/layout.svelte";
 </script>
 
 <Layout>
