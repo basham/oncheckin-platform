@@ -9,7 +9,7 @@ import ws from "ws";
 // Fail fast with a clear message if configuration is missing or invalid.
 if (!config || typeof config.dbDir !== "string" || !config.dbDir) {
 	console.error(
-		"Missing or invalid configuration: `config.dbDir` is not set. Please add configuration files (see README) or set `NODE_CONFIG_DIR` to point to a config directory."
+		"Missing or invalid configuration: `config.dbDir` is not set. Please add configuration files (see README) or set `NODE_CONFIG_DIR` to point to a config directory.",
 	);
 	process.exit(1);
 }

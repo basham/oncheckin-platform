@@ -1,7 +1,7 @@
 import { registerRoute as originalRegisterRoute } from "workbox-routing";
 import { Store } from "@src/api/computed/store.js";
 import { getAccount, getCurrentAccountId, getDevice, hasOrg } from "./api.js";
-import { transformHead } from "./template.js";
+import { createIndexHTML } from "./template.js";
 
 export function registerRoute(path, methods) {
 	const { get, post } = methods;
@@ -139,21 +139,13 @@ function respondWithDownloadJSON(data) {
 
 function respondWithTemplate(data) {
 	const entryBase = import.meta.env.DEV ? "/src" : "";
-	const template = `
-<!DOCTYPE html>
-<html lang="en">
-	<head>
-		<!-- HEAD -->
+	const head = `
 		<script id="data" type="application/json">
 	${JSON.stringify(data)}
 		</script>
 		<script type="module" crossorigin src="${entryBase}/index.js"></script>
-	</head>
-	<body>
-	</body>
-</html>
 `;
-	const options = { title: [data.h2, data.h1] };
-	const html = transformHead(template, options);
+	const title = [data.h2, data.h1];
+	const html = createIndexHTML({ head, title });
 	return respondWithHTML(html);
 }

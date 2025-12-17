@@ -3,7 +3,7 @@ import path from "path";
 import { defineConfig } from "vite";
 import { VitePWA } from "vite-plugin-pwa";
 import { viteStaticCopy } from "vite-plugin-static-copy";
-import { manifest, transformHead } from "./src/template.js"
+import { createIndexHTML, manifest } from "./src/template.js";
 
 export default defineConfig({
 	build: {
@@ -33,8 +33,8 @@ export default defineConfig({
 		{
 			name: "html-transform",
 			transformIndexHtml(html) {
-				return transformHead(html);
-			}
+				return createIndexHTML({ head: html });
+			},
 		},
 		VitePWA({
 			devOptions: {

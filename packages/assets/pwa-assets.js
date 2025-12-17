@@ -28,10 +28,10 @@ async function run() {
 		generateManifestIconsEntry("string", resolvedInstructions),
 	);
 
-	const headLinks = generateHtmlMarkup(resolvedInstructions).join('\n');
+	const headLinks = generateHtmlMarkup(resolvedInstructions).join("\n");
 	await writeFile(
 		resolve(dist, "metadata.js"),
-		`export const headLinks = \`${headLinks}\`;\n`
+		`export const headLinks = \`${headLinks}\`;\n`,
 	);
 }
 
