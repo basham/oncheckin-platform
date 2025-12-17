@@ -7,7 +7,7 @@
 	"scripts": {
 		"dev": "pnpm --filter assets build",
 		"build": "run-s build:copy build:images build:meta",
-		"build:copy": "cpx logo.svg dist",
+		"build:copy": "cpx src/logo.svg dist",
 		"build:images": "pwa-assets-generator",
 		"build:meta": "node pwa-assets.js"
 	},

@@ -1,4 +1,4 @@
-import styleUrl from "@oncheckin/assets/style.css?url";
+import styleUrl from "@oncheckin/assets/src/style.css?url";
 
 import { registerRoute as originalRegisterRoute } from "workbox-routing";
 import { getAccount, getCurrentAccountId, getDevice, hasOrg } from "./api.js";
