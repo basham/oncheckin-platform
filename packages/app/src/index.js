@@ -2,8 +2,8 @@ import { mount } from "svelte";
 import { registerSW } from "virtual:pwa-register";
 import "@oncheckin/assets/src/style.css";
 
-// Export this, so then `upgrader.svelte` can import it.
-// This is an ugly solution to prevent a circular dependency.
+// Export this so `upgrader.svelte` can import it.
+// This prevents a circular dependency.
 window.registerSW = registerSW;
 
 const params = new URLSearchParams(window.location.search);
