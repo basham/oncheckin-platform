@@ -2,14 +2,10 @@
 	"name": "oncheckin-platform",
 	"version": "1.0.0",
 	"private": true,
-	"description": "",
-	"scripts": {
-		"dev:app": "pnpm --filter app... dev",
-		"dev:web": "pnpm --filter web... dev",
-		"build:app": "pnpm --filter app... build",
-		"build:web": "pnpm --filter web... build"
-	},
-	"keywords": [],
+	"description": "Membership and event management software for the Hash House Harriers running clubs.",
+	"type": "module",
+	"author": "Chris Basham <chris@bash.am>",
+	"license": "MIT",
 	"repository": {
 		"type": "git",
 		"url": "git+https://github.com/basham/oncheckin-platform.git"
@@ -18,7 +14,21 @@
 		"url": "https://github.com/basham/oncheckin-platform/issues"
 	},
 	"homepage": "https://github.com/basham/oncheckin-platform#readme",
-	"author": "Chris Basham <chris@bash.am>",
-	"license": "MIT",
-	"packageManager": "pnpm@10.25.0"
+	"packageManager": "pnpm@10.25.0",
+	"engines": {
+		"node": ">=22",
+		"pnpm": ">=10"
+	},
+	"scripts": {
+		"app:dev": "pnpm --filter app... dev",
+		"app:build": "pnpm --filter app... build",
+		"web:dev": "pnpm --filter web... dev",
+		"web:build": "pnpm --filter web... build",
+		"format": "prettier --write ."
+	},
+	"pnpm": {
+		"overrides": {
+			"sharp": "0.33.5"
+		}
+	}
 }

@@ -2,37 +2,13 @@
 	"name": "@oncheckin/app",
 	"version": "1.0.0",
 	"private": true,
-	"description": "Membership and event management software for Hash House Harriers.",
-	"main": "index.js",
+	"description": "Admin app for managing club data.",
 	"type": "module",
 	"scripts": {
 		"dev": "vite --open",
 		"build": "vite build",
 		"format": "prettier --write .",
 		"preview": "vite preview --open"
-	},
-	"repository": {
-		"type": "git",
-		"url": "git+https://github.com/basham/oncheckin-platform.git",
-		"directory": "packages/app"
-	},
-	"author": "Chris Basham <chris@bash.am>",
-	"license": "MIT",
-	"bugs": {
-		"url": "https://github.com/basham/oncheckin-platform/issues"
-	},
-	"homepage": "https://github.com/basham/oncheckin-platform#readme",
-	"devDependencies": {
-		"@sveltejs/vite-plugin-svelte": "5.0.3",
-		"prettier": "3.5.3",
-		"prettier-plugin-svelte": "3.4.0",
-		"vite": "6.3.5",
-		"vite-plugin-pwa": "1.0.0",
-		"vite-plugin-static-copy": "3.1.4",
-		"workbox-build": "7.3.0",
-		"workbox-precaching": "7.3.0",
-		"workbox-routing": "7.3.0",
-		"workbox-window": "7.3.0"
 	},
 	"dependencies": {
 		"@oncheckin/assets": "workspace:*",
@@ -47,7 +23,16 @@
 		"yjs": "13.6.27",
 		"zod": "3.25.7"
 	},
-	"engine": {
-		"node": "22.x"
+	"devDependencies": {
+		"@sveltejs/vite-plugin-svelte": "5.0.3",
+		"prettier": "3.5.3",
+		"prettier-plugin-svelte": "3.4.0",
+		"vite": "6.3.5",
+		"vite-plugin-pwa": "1.0.0",
+		"vite-plugin-static-copy": "3.1.4",
+		"workbox-build": "7.3.0",
+		"workbox-precaching": "7.3.0",
+		"workbox-routing": "7.3.0",
+		"workbox-window": "7.3.0"
 	}
 }

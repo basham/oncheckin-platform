@@ -1,19 +1,19 @@
 {
 	"name": "@oncheckin/web",
-	"type": "module",
-	"version": "0.0.1",
+	"version": "1.0.0",
 	"private": true,
+	"description": "Public homepage.",
+	"type": "module",
 	"scripts": {
 		"dev": "astro dev --open",
 		"build": "astro build",
 		"preview": "astro preview --open",
 		"astro": "astro"
 	},
-	"devDependencies": {
-		"astro": "5.16.5"
-	},
 	"dependencies": {
 		"@oncheckin/assets": "workspace:*"
 	},
-	"packageManager": "pnpm@10.25.0"
+	"devDependencies": {
+		"astro": "5.16.5"
+	}
 }
