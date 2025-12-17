@@ -1,4 +1,4 @@
-import cuid from "@paralleldrive/cuid2";
+import { createId as createCuid } from "@paralleldrive/cuid2";
 import * as Y from "yjs";
 import { IndexeddbPersistence, storeState } from "y-indexeddb";
 import { WebsocketProvider } from "y-websocket";
@@ -10,7 +10,7 @@ export { Y };
 export const cache = new Map();
 
 export function createId() {
-	return cuid.createId();
+	return createCuid();
 }
 
 export function createYMap() {

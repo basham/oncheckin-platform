@@ -6,6 +6,14 @@ import zlib from "node:zlib";
 import { createRequire } from "node:module";
 import ws from "ws";
 
+// Fail fast with a clear message if configuration is missing or invalid.
+if (!config || typeof config.dbDir !== "string" || !config.dbDir) {
+	console.error(
+		"Missing or invalid configuration: `config.dbDir` is not set. Please add configuration files (see README) or set `NODE_CONFIG_DIR` to point to a config directory."
+	);
+	process.exit(1);
+}
+
 if (!fs.existsSync(config.dbDir)) {
 	fs.mkdirSync(config.dbDir, { recursive: true });
 }
@@ -14,7 +22,11 @@ process.env.YPERSISTENCE = config.dbDir;
 
 const require = createRequire(import.meta.url);
 const { WebsocketProvider } = require("y-websocket");
-const { getYDoc } = require("y-websocket/bin/utils");
+const Y = require("yjs");
+
+function getYDoc(name) {
+	return new Y.Doc();
+}
 
 config.docs.forEach(syncDoc);
 
