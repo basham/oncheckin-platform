@@ -5,8 +5,8 @@ const TAG = Symbol("tag");
 const ids = new Set();
 
 const schemas = {
-	date: z.string().date(),
-	id: z.string().cuid2().or(z.enum(ids)),
+	date: z.iso().date(),
+	id: z.cuid2().or(z.enum(ids)),
 	tag: z.literal(0).default(0),
 	text: z.string().trim().min(1),
 	textOptional: z.string().trim().optional(),
@@ -30,7 +30,7 @@ export const components = createComponents({
 		name: schemas.text,
 		shortName: schemas.textOptional,
 		location: schemas.textOptional,
-		url: z.string().url().optional(),
+		url: z.url().optional(),
 	}),
 	organizes: schemas.tag,
 	person: z.object({
