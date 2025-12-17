@@ -1,9 +1,3 @@
 dev-dist
 dist
 *.yaml
-node_modules
-**/node_modules
-.svelte-kit
-public/build
-packages/**/node_modules
-**/dist
