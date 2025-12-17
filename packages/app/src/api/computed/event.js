@@ -1,10 +1,10 @@
-import { format, isAfter, isFuture, isPast, isToday, parseISO } from 'date-fns';
-import { getOrCreate, sortDesc } from '@src/util.js';
-import { components } from '../components.js';
+import { format, isAfter, isFuture, isPast, isToday, parseISO } from "date-fns";
+import { getOrCreate, sortDesc } from "@src/util.js";
+import { components } from "../components.js";
 
-const DEFAULT_NAME = '(Event)';
+const DEFAULT_NAME = "(Event)";
 const INVALID_DATE = new Date(NaN);
-const PATH = 'events';
+const PATH = "events";
 
 export function getEventData(source) {
 	const events = getEvents(source);
@@ -20,22 +20,21 @@ export function getEventData(source) {
 		pastEvents,
 		upcomingEvents,
 		eventsByYear,
-		eventYears
+		eventYears,
 	};
 }
 
 function getEvents(source) {
 	const { store } = source;
-	const events = store.getEntities()
+	const events = store
+		.getEntities()
 		.map((entity) => getEvent(entity, source))
-		.filter((event) => event)
+		.filter((event) => event);
 	const eventCount = getEventCount(store, events);
-	return events
-		.sort(sortDesc('dateObj'))
-		.map((event, i) => {
-			const count = eventCount - i;
-			return { ...event, count };
-		});
+	return events.sort(sortDesc("dateObj")).map((event, i) => {
+		const count = eventCount - i;
+		return { ...event, count };
+	});
 }
 
 function getEvent(entity, source) {
@@ -50,10 +49,10 @@ function getEvent(entity, source) {
 	}
 	const { id } = entity;
 	const dateObj = parseISO(date);
-	const displayDate = format(dateObj, 'PP');
-	const displayDateMedium = format(dateObj, 'E, MMM d');
-	const displayDateLong = format(dateObj, 'E, PP');
-	const year = format(dateObj, 'y');
+	const displayDate = format(dateObj, "PP");
+	const displayDateMedium = format(dateObj, "E, MMM d");
+	const displayDateLong = format(dateObj, "E, PP");
+	const year = format(dateObj, "y");
 	const name = event.name.trim() || DEFAULT_NAME;
 	const url = `${org.url}${PATH}/${id}/`;
 	return {
@@ -65,7 +64,7 @@ function getEvent(entity, source) {
 		displayDateLong,
 		name,
 		url,
-		year
+		year,
 	};
 }
 
@@ -76,9 +75,9 @@ function getEventCount(store, events) {
 	}
 	const count = entity.get(components.count);
 	const date = count.date ? parseISO(count.date) : INVALID_DATE;
-	const countAfter = events
-		.filter(({ dateObj }) => isAfter(dateObj, date))
-		.length;
+	const countAfter = events.filter(({ dateObj }) =>
+		isAfter(dateObj, date),
+	).length;
 	return count.value + countAfter;
 }
 

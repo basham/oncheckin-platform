@@ -1,4 +1,5 @@
 # oncheckin-client-yjs
+
 Persistent online peer and backup for Yjs docs.
 
 ## Setup
@@ -21,6 +22,6 @@ docRoot: data
 debounceBackupInterval: 10000
 # List of doc names to backup.
 docs:
-- <doc 1>
-- <doc 2>
+  - <doc 1>
+  - <doc 2>
 ```

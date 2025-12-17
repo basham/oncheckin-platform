@@ -1,23 +1,21 @@
-import { Store } from '@src/api/computed/store.js';
+import { Store } from "@src/api/computed/store.js";
 
-const namedValues = 'all|true|false|ready'.split('|');
-const sortValues = 'event|runs|hosts|name'.split('|');
+const namedValues = "all|true|false|ready".split("|");
+const sortValues = "event|runs|hosts|name".split("|");
 
 export async function get({ data }) {
 	const { org } = data;
 	const params = {
 		named: namedValues.includes(data.named) ? data.named : namedValues[0],
-		sort: sortValues.includes(data.sort) ? data.sort : sortValues[0]
+		sort: sortValues.includes(data.sort) ? data.sort : sortValues[0],
 	};
-	const h1 = 'Hashers';
-	const {
-		participants: allParticipants,
-		checkInsByParticipantId
-	} = await Store(org.id);
+	const h1 = "Hashers";
+	const { participants: allParticipants, checkInsByParticipantId } =
+		await Store(org.id);
 
 	const participants = allParticipants
 		.map((p) => {
-			const participantCheckIns = checkInsByParticipantId.get(p.id)
+			const participantCheckIns = checkInsByParticipantId.get(p.id);
 			const lastCheckIn = participantCheckIns[0];
 			const lastEvent = lastCheckIn?.event;
 			const latestCheckIn = lastCheckIn || {};
@@ -28,7 +26,7 @@ export async function get({ data }) {
 				hostCount,
 				lastEvent,
 				namedStatus,
-				runCount
+				runCount,
 			};
 		})
 		.filter((p) => {
@@ -41,10 +39,10 @@ export async function get({ data }) {
 			return false;
 		})
 		.filter((p) => {
-			if (params.sort === 'hosts') {
+			if (params.sort === "hosts") {
 				return p.hostCount > 0;
 			}
-			if (params.sort === 'runs') {
+			if (params.sort === "runs") {
 				return p.runCount > 0;
 			}
 			return true;
@@ -54,12 +52,12 @@ export async function get({ data }) {
 	return { template };
 }
 
-function getNamedStatus ({ alias, runCount }) {
+function getNamedStatus({ alias, runCount }) {
 	if (alias) {
-		return ['true'];
+		return ["true"];
 	}
 	if (runCount >= 5) {
-		return ['ready', 'false'];
+		return ["ready", "false"];
 	}
-	return ['false'];
+	return ["false"];
 }

@@ -1,7 +1,7 @@
-import { getOrCreate, setMapFromObject } from '@src/util.js';
-import { components } from './components.js';
-import { loadStore } from './entity.js';
-import { createYMap } from './store.js';
+import { getOrCreate, setMapFromObject } from "@src/util.js";
+import { components } from "./components.js";
+import { loadStore } from "./entity.js";
+import { createYMap } from "./store.js";
 
 export async function createCheckIn(orgId, participantId, eventId, values) {
 	const store = await loadStore(orgId);
@@ -44,7 +44,7 @@ export async function getOrg(id) {
 	if (!entity) {
 		return;
 	}
-	const name = entity.get(components.org)?.name || '(Organization)';
+	const name = entity.get(components.org)?.name || "(Organization)";
 	const url = `/orgs/${id}/`;
 	const openUrl = `${url}open/`;
 	const inviteCode = self.btoa(JSON.stringify({ id, name }));
@@ -55,17 +55,17 @@ export async function getOrg(id) {
 		name,
 		openUrl,
 		shareUrl,
-		url
+		url,
 	};
 }
 
 export async function importOrg(data) {
 	const store = await loadStore();
-	const origin = 'importer';
+	const origin = "importer";
 	const didImport = new Promise((resolve) => {
-		store.doc.on('afterTransaction', (transaction) => {
+		store.doc.on("afterTransaction", (transaction) => {
 			if (transaction.origin === origin) {
-				store.doc.off('afterTransaction', this);
+				store.doc.off("afterTransaction", this);
 				resolve(transaction);
 			}
 		});
@@ -87,10 +87,15 @@ export async function renameOrg(orgId, name) {
 	if (!entity) {
 		return;
 	}
-	entity.set(components.org, { name })
+	entity.set(components.org, { name });
 }
 
-export async function setCheckIn(orgId, participantId, eventId, { organizes = false }) {
+export async function setCheckIn(
+	orgId,
+	participantId,
+	eventId,
+	{ organizes = false },
+) {
 	const store = await loadStore(orgId);
 	const entity = store.getEntity(participantId, eventId);
 	if (!entity) {

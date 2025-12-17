@@ -63,10 +63,10 @@ export function sortDesc(key) {
 export function todayDate() {
 	const now = new Date();
 	now.setHours(0, 0, 0);
-	return now.toJSON().split('T')[0];
+	return now.toJSON().split("T")[0];
 }
 
-export function waitForElement(id, callback = () => { }, retry = 180) {
+export function waitForElement(id, callback = () => {}, retry = 180) {
 	const el = document.getElementById(id);
 	if (el) {
 		return callback(el);

@@ -1,9 +1,9 @@
-import cuid from '@paralleldrive/cuid2';
-import * as Y from 'yjs';
-import { IndexeddbPersistence, storeState } from 'y-indexeddb';
-import { WebsocketProvider } from 'y-websocket';
-import { APP_ID, SERVER_URL } from '../constants.js';
-import { debounce, getOrCreate } from '../util.js';
+import cuid from "@paralleldrive/cuid2";
+import * as Y from "yjs";
+import { IndexeddbPersistence, storeState } from "y-indexeddb";
+import { WebsocketProvider } from "y-websocket";
+import { APP_ID, SERVER_URL } from "../constants.js";
+import { debounce, getOrCreate } from "../util.js";
 
 export { Y };
 
@@ -49,13 +49,15 @@ export function createRemoteStore(id) {
 		let remoteProvider;
 		const bc = new BroadcastChannel(`bc-${id}`);
 		const sendCount = () => {
-			const value = remoteProvider ? remoteProvider.awareness.getStates().size : 0;
-			console.log('COUNT', value, id);
-			return bc.postMessage(['count', value]);
+			const value = remoteProvider
+				? remoteProvider.awareness.getStates().size
+				: 0;
+			console.log("COUNT", value, id);
+			return bc.postMessage(["count", value]);
 		};
 		const createRemoteProvider = () => {
 			remoteProvider = new WebsocketProvider(SERVER_URL, storeId, doc);
-			remoteProvider.awareness.on('change', sendCount);
+			remoteProvider.awareness.on("change", sendCount);
 		};
 		const destroyRemoteProvider = () => {
 			if (!remoteProvider) {
@@ -81,16 +83,16 @@ export function createRemoteStore(id) {
 		}, 1000);
 
 		// Reset the provider when back online after going offline.
-		self.addEventListener('offline', () => {
+		self.addEventListener("offline", () => {
 			destroyRemoteProvider();
 		});
-		self.addEventListener('online', () => {
+		self.addEventListener("online", () => {
 			createRemoteProvider();
 		});
 
 		bc.onmessage = (event) => {
 			const [type] = event.data;
-			if (type === 'getCount') {
+			if (type === "getCount") {
 				sendCount();
 			}
 		};

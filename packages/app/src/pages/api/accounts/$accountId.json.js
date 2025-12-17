@@ -1,4 +1,4 @@
-import { getAccount } from '@src/api.js';
+import { getAccount } from "@src/api.js";
 
 export async function get({ keys }) {
 	const { accountId } = keys;

@@ -1,4 +1,4 @@
-const checkInIdDelimiter = '|';
+const checkInIdDelimiter = "|";
 
 export function decodeCheckInId(id) {
 	const [participantId, eventId] = id.split(checkInIdDelimiter);

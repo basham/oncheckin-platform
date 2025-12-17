@@ -1,5 +1,5 @@
-import { getOrCreate } from '@src/util.js';
-import { cache, createId, createYMap, createRemoteStore } from './store.js';
+import { getOrCreate } from "@src/util.js";
+import { cache, createId, createYMap, createRemoteStore } from "./store.js";
 
 export async function addOrg(accountId, orgId) {
 	const account = await getAccountDB(accountId);
@@ -19,8 +19,8 @@ export async function getAccountDB(id = createId()) {
 	//return getOrCreate(cache, `account:${id}`, async () => {
 	const store = await createRemoteStore(id);
 	const { doc } = store;
-	const data = doc.getMap('data');
-	const rows = ['orgs'].map((key) => [key, getOrCreate(data, key, createYMap)]);
+	const data = doc.getMap("data");
+	const rows = ["orgs"].map((key) => [key, getOrCreate(data, key, createYMap)]);
 	const rowsEntries = Object.fromEntries(rows);
 	return { ...store, ...rowsEntries, data };
 	//})
@@ -37,9 +37,9 @@ export async function getAccount(id) {
 		return;
 	}
 
-	const type = 'account';
+	const type = "account";
 	const version = 1;
-	const name = db.data.get('name');
+	const name = db.data.get("name");
 	const orgs = [...db.orgs.keys()];
 	const url = `/accounts/${id}/`;
 	return { id: db.id, type, version, name, orgs, url };
@@ -52,5 +52,5 @@ export async function hasOrg(accountId, orgId) {
 
 export async function renameAccount(id, name) {
 	const db = await getAccountDB(id);
-	db.data.set('name', name);
+	db.data.set("name", name);
 }

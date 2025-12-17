@@ -1,7 +1,7 @@
-import { deleteOrg, getOrgIdsFromAllAccounts, removeOrg } from '@src/api.js';
+import { deleteOrg, getOrgIdsFromAllAccounts, removeOrg } from "@src/api.js";
 
 export function get() {
-	const h1 = 'Delete organization';
+	const h1 = "Delete organization";
 	const template = { h1 };
 	return { template };
 }
@@ -13,5 +13,5 @@ export async function post({ data }) {
 	if (!orgIds.includes(org.id)) {
 		await deleteOrg(org.id);
 	}
-	return { redirect: '/orgs/' };
+	return { redirect: "/orgs/" };
 }

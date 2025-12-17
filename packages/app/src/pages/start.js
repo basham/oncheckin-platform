@@ -4,26 +4,26 @@ import {
 	renameAccount,
 	renameDevice,
 	setCurrentAccount,
-} from '@src/api.js';
+} from "@src/api.js";
 
-const orgsPath = '/orgs/';
+const orgsPath = "/orgs/";
 
 export async function get({ data }) {
 	const { device } = data;
-	if (device.state === 'active') {
+	if (device.state === "active") {
 		const redirect = orgsPath;
 		return { redirect };
 	}
-	const h1 = 'Get started';
+	const h1 = "Get started";
 	const template = { h1 };
 	return { template };
 }
 
 export async function post({ request, data }) {
 	const formData = await request.formData();
-	const deviceName = formData.get('deviceName');
+	const deviceName = formData.get("deviceName");
 	await renameDevice(deviceName);
-	const accountName = formData.get('accountName');
+	const accountName = formData.get("accountName");
 	const account = await createAccount();
 	await renameAccount(account.id, accountName);
 	await addAccount(account.id);

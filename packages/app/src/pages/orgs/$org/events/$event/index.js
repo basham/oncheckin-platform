@@ -1,4 +1,4 @@
-import { Store } from '@src/api/computed/store.js';
+import { Store } from "@src/api/computed/store.js";
 
 export async function get({ data }) {
 	const { org, event } = data;

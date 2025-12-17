@@ -1,7 +1,7 @@
-import { components } from '../components.js';
+import { components } from "../components.js";
 
-const DEFAULT_NAME = '(Organization)';
-const PATH = 'orgs';
+const DEFAULT_NAME = "(Organization)";
+const PATH = "orgs";
 
 export function getOrgData(source) {
 	const { store } = source;
@@ -12,7 +12,7 @@ export function getOrgData(source) {
 		...source,
 		json,
 		org,
-		orgEvent
+		orgEvent,
 	};
 }
 

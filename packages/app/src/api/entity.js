@@ -1,9 +1,9 @@
-import { getOrCreate } from '@src/util.js';
-import { isComponent, isIdValid } from './components.js';
-import { createId, createYMap, createRemoteStore } from './store.js';
+import { getOrCreate } from "@src/util.js";
+import { isComponent, isIdValid } from "./components.js";
+import { createId, createYMap, createRemoteStore } from "./store.js";
 
-const DOC_ROOT = 'data';
-const ID_DELIMITER = '|';
+const DOC_ROOT = "data";
+const ID_DELIMITER = "|";
 
 export async function loadStore(id = createId()) {
 	const store = await createRemoteStore(id);
@@ -80,17 +80,17 @@ export async function loadStore(id = createId()) {
 
 function getId(idParts) {
 	if (!Array.isArray(idParts)) {
-		throw new Error('Id parameter must be an array')
+		throw new Error("Id parameter must be an array");
 	}
-	const parts = idParts.map((value) => value?.id || value)
+	const parts = idParts.map((value) => value?.id || value);
 	if (!parts.every(isIdValid)) {
-		throw new Error('Invalid id');
+		throw new Error("Invalid id");
 	}
 	return parts.join(ID_DELIMITER);
 }
 
 function validateComponent(component) {
 	if (!isComponent(component)) {
-		throw Error('Argument must be a component');
+		throw Error("Argument must be a component");
 	}
 }

@@ -27,6 +27,10 @@
 		"web:build": "pnpm --filter web... build",
 		"format": "prettier --write ."
 	},
+	"devDependencies": {
+		"prettier": "3.5.3",
+		"prettier-plugin-svelte": "3.4.0"
+	},
 	"pnpm": {
 		"overrides": {
 			"sharp": "0.33.5"

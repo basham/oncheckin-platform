@@ -1,10 +1,10 @@
-import { getOrCreate, pipe } from '@src/util.js';
-import { loadStore } from '../entity.js';
-import { getCheckInData } from './check-in.js';
-import { getEventData } from './event.js';
-import { getOrgData } from './org.js';
-import { getParticipantData } from './participant.js';
-import { getParticipationData } from './participation.js';
+import { getOrCreate, pipe } from "@src/util.js";
+import { loadStore } from "../entity.js";
+import { getCheckInData } from "./check-in.js";
+import { getEventData } from "./event.js";
+import { getOrgData } from "./org.js";
+import { getParticipantData } from "./participant.js";
+import { getParticipationData } from "./participation.js";
 
 const cache = new Map();
 
@@ -24,6 +24,6 @@ async function compute(orgId) {
 		getEventData,
 		getParticipantData,
 		getCheckInData,
-		getParticipationData
+		getParticipationData,
 	);
 }

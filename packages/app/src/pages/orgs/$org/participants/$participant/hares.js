@@ -1,5 +1,5 @@
-import { Store } from '@src/api/computed/store.js';
-import { getOrCreate } from '@src/util.js';
+import { Store } from "@src/api/computed/store.js";
+import { getOrCreate } from "@src/util.js";
 
 export async function get({ data }) {
 	const { org, participant } = data;

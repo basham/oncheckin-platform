@@ -1,14 +1,9 @@
-import styleUrl from '@oncheckin/assets/style.css?url';
+import styleUrl from "@oncheckin/assets/style.css?url";
 
-import { registerRoute as originalRegisterRoute } from 'workbox-routing';
-import {
-	getAccount,
-	getCurrentAccountId,
-	getDevice,
-	hasOrg
-} from './api.js';
-import { Store } from '@src/api/computed/store.js';
-import { APP_NAME } from './constants.js';
+import { registerRoute as originalRegisterRoute } from "workbox-routing";
+import { getAccount, getCurrentAccountId, getDevice, hasOrg } from "./api.js";
+import { Store } from "@src/api/computed/store.js";
+import { APP_NAME } from "./constants.js";
 
 export function registerRoute(path, methods) {
 	const { get, post } = methods;
@@ -16,7 +11,7 @@ export function registerRoute(path, methods) {
 		registerRouteMethod(path, get);
 	}
 	if (post) {
-		registerRouteMethod(path, post, 'POST');
+		registerRouteMethod(path, post, "POST");
 	}
 }
 
@@ -27,13 +22,13 @@ function registerRouteMethod(path, handler, method) {
 		async (options) => {
 			const params = await getParams(options.url.pathname.match(re).groups);
 			if (!params) {
-				const h1 = 'Page not found';
-				const route = '404';
+				const h1 = "Page not found";
+				const route = "404";
 				const data = { h1, route };
 				return respondWithTemplate(data);
 			}
 			const searchParams = Object.fromEntries(options.url.searchParams);
-			const route = path.replace(/^\//, '').replace(/\/index$/, '');
+			const route = path.replace(/^\//, "").replace(/\/index$/, "");
 			const data = { ...searchParams, route, ...params };
 			const { download, html, json, template, redirect } = await handler({
 				...options,
@@ -55,7 +50,7 @@ function registerRouteMethod(path, handler, method) {
 				return Response.redirect(redirect);
 			}
 		},
-		method
+		method,
 	);
 }
 
@@ -66,7 +61,7 @@ async function getParams(source = {}) {
 		participant: getParticipantFromParams,
 	};
 	const paramPromises = [...Object.entries(source)].map(([k, v]) =>
-		paramMap[k] ? paramMap[k](k, source) : [k, v]
+		paramMap[k] ? paramMap[k](k, source) : [k, v],
 	);
 	const mapedParams = await Promise.all(paramPromises);
 	const someNotFound = mapedParams.some((v) => !v);
@@ -110,15 +105,15 @@ async function getParticipantFromParams(key, { org: oid, participant: pid }) {
 function createResponse(body, contentType, headers = {}) {
 	const options = {
 		headers: {
-			'Content-Type': contentType,
-			...headers
+			"Content-Type": contentType,
+			...headers,
 		},
 	};
 	return new Response(body, options);
 }
 
 function createTitle(h1, h2) {
-	return [h2, h1, APP_NAME].filter((t) => t).join(' - ');
+	return [h2, h1, APP_NAME].filter((t) => t).join(" - ");
 }
 
 function regexFromPath(path) {
@@ -126,30 +121,30 @@ function regexFromPath(path) {
 		// Replace `$key` with a group of the name name.
 		.replace(/\$(\w+)/g, (match, p1) => `(?<${p1}>[\\w-=]+)`)
 		// Remove the `/index` file name.
-		.replace(/\/index$/, '');
+		.replace(/\/index$/, "");
 	// Make trailing `/` optional.
 	return new RegExp(`^${p}/?$`);
 }
 
 function respondWithHTML(body) {
-	return createResponse(body, 'text/html');
+	return createResponse(body, "text/html");
 }
 
 function respondWithJSON(data) {
 	const body = JSON.stringify(data);
-	return createResponse(body, 'application/json');
+	return createResponse(body, "application/json");
 }
 
 function respondWithDownloadJSON(data) {
 	const body = JSON.stringify(data);
 	const headers = {
-		'Content-Disposition': 'attachment'
+		"Content-Disposition": "attachment",
 	};
-	return createResponse(body, 'application/json', headers);
+	return createResponse(body, "application/json", headers);
 }
 
 function respondWithTemplate(data) {
-	const entryBase = import.meta.env.DEV ? '/src' : '';
+	const entryBase = import.meta.env.DEV ? "/src" : "";
 	const { title = createTitle(data.h1, data.h2) } = data;
 	const body = `
 <!DOCTYPE html>

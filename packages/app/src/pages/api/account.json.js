@@ -1,4 +1,4 @@
-import { getCurrentAccountId, getAccount } from '@src/api.js';
+import { getCurrentAccountId, getAccount } from "@src/api.js";
 
 export async function get() {
 	const id = await getCurrentAccountId();

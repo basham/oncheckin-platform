@@ -1,7 +1,7 @@
-import { sortAsc } from '@src/util.js';
-import { getAccount } from './account.js';
-import { getDevice } from './device.js';
-import { getOrg } from './org.js';
+import { sortAsc } from "@src/util.js";
+import { getAccount } from "./account.js";
+import { getDevice } from "./device.js";
+import { getOrg } from "./org.js";
 
 export async function getOrgs(accountId) {
 	const account = await getAccount(accountId);
@@ -15,7 +15,7 @@ export async function getOrgs(accountId) {
 		const org = await getOrg(orgId);
 		orgs.push(org);
 	}
-	orgs.sort(sortAsc('name'));
+	orgs.sort(sortAsc("name"));
 
 	return orgs;
 }

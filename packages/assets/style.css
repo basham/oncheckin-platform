@@ -72,27 +72,69 @@
 	--color-primary-100: oklch(100% var(--chroma-100) var(--hue));
 
 	--chroma-base: 0.25;
-	--color-base-0: oklch(0% calc(var(--chroma-0) * var(--chroma-base)) var(--hue));
-	--color-base-5: oklch(5% calc(var(--chroma-5) * var(--chroma-base)) var(--hue));
-	--color-base-10: oklch(10% calc(var(--chroma-10) * var(--chroma-base)) var(--hue));
-	--color-base-15: oklch(15% calc(var(--chroma-15) * var(--chroma-base)) var(--hue));
-	--color-base-20: oklch(20% calc(var(--chroma-20) * var(--chroma-base)) var(--hue));
-	--color-base-25: oklch(25% calc(var(--chroma-25) * var(--chroma-base)) var(--hue));
-	--color-base-30: oklch(30% calc(var(--chroma-30) * var(--chroma-base)) var(--hue));
-	--color-base-35: oklch(35% calc(var(--chroma-35) * var(--chroma-base)) var(--hue));
-	--color-base-40: oklch(40% calc(var(--chroma-40) * var(--chroma-base)) var(--hue));
-	--color-base-45: oklch(45% calc(var(--chroma-45) * var(--chroma-base)) var(--hue));
-	--color-base-50: oklch(50% calc(var(--chroma-50) * var(--chroma-base)) var(--hue));
-	--color-base-55: oklch(55% calc(var(--chroma-55) * var(--chroma-base)) var(--hue));
-	--color-base-60: oklch(60% calc(var(--chroma-60) * var(--chroma-base)) var(--hue));
-	--color-base-65: oklch(65% calc(var(--chroma-65) * var(--chroma-base)) var(--hue));
-	--color-base-70: oklch(70% calc(var(--chroma-70) * var(--chroma-base)) var(--hue));
-	--color-base-75: oklch(75% calc(var(--chroma-75) * var(--chroma-base)) var(--hue));
-	--color-base-80: oklch(80% calc(var(--chroma-80) * var(--chroma-base)) var(--hue));
-	--color-base-85: oklch(85% calc(var(--chroma-85) * var(--chroma-base)) var(--hue));
-	--color-base-90: oklch(90% calc(var(--chroma-90) * var(--chroma-base)) var(--hue));
-	--color-base-95: oklch(95% calc(var(--chroma-95) * var(--chroma-base)) var(--hue));
-	--color-base-100: oklch(100% calc(var(--chroma-100) * var(--chroma-base)) var(--hue));
+	--color-base-0: oklch(
+		0% calc(var(--chroma-0) * var(--chroma-base)) var(--hue)
+	);
+	--color-base-5: oklch(
+		5% calc(var(--chroma-5) * var(--chroma-base)) var(--hue)
+	);
+	--color-base-10: oklch(
+		10% calc(var(--chroma-10) * var(--chroma-base)) var(--hue)
+	);
+	--color-base-15: oklch(
+		15% calc(var(--chroma-15) * var(--chroma-base)) var(--hue)
+	);
+	--color-base-20: oklch(
+		20% calc(var(--chroma-20) * var(--chroma-base)) var(--hue)
+	);
+	--color-base-25: oklch(
+		25% calc(var(--chroma-25) * var(--chroma-base)) var(--hue)
+	);
+	--color-base-30: oklch(
+		30% calc(var(--chroma-30) * var(--chroma-base)) var(--hue)
+	);
+	--color-base-35: oklch(
+		35% calc(var(--chroma-35) * var(--chroma-base)) var(--hue)
+	);
+	--color-base-40: oklch(
+		40% calc(var(--chroma-40) * var(--chroma-base)) var(--hue)
+	);
+	--color-base-45: oklch(
+		45% calc(var(--chroma-45) * var(--chroma-base)) var(--hue)
+	);
+	--color-base-50: oklch(
+		50% calc(var(--chroma-50) * var(--chroma-base)) var(--hue)
+	);
+	--color-base-55: oklch(
+		55% calc(var(--chroma-55) * var(--chroma-base)) var(--hue)
+	);
+	--color-base-60: oklch(
+		60% calc(var(--chroma-60) * var(--chroma-base)) var(--hue)
+	);
+	--color-base-65: oklch(
+		65% calc(var(--chroma-65) * var(--chroma-base)) var(--hue)
+	);
+	--color-base-70: oklch(
+		70% calc(var(--chroma-70) * var(--chroma-base)) var(--hue)
+	);
+	--color-base-75: oklch(
+		75% calc(var(--chroma-75) * var(--chroma-base)) var(--hue)
+	);
+	--color-base-80: oklch(
+		80% calc(var(--chroma-80) * var(--chroma-base)) var(--hue)
+	);
+	--color-base-85: oklch(
+		85% calc(var(--chroma-85) * var(--chroma-base)) var(--hue)
+	);
+	--color-base-90: oklch(
+		90% calc(var(--chroma-90) * var(--chroma-base)) var(--hue)
+	);
+	--color-base-95: oklch(
+		95% calc(var(--chroma-95) * var(--chroma-base)) var(--hue)
+	);
+	--color-base-100: oklch(
+		100% calc(var(--chroma-100) * var(--chroma-base)) var(--hue)
+	);
 
 	--color-p-0: var(--color-primary-5);
 	--color-p-3: var(--color-primary-35);
@@ -224,7 +266,7 @@ p {
 }
 
 .button,
-.input[type='file']::file-selector-button {
+.input[type="file"]::file-selector-button {
 	background-color: var(--color-b-3);
 	border: none;
 	border-radius: var(--size-1);
@@ -299,15 +341,15 @@ p {
 	_background-color: var(--color-p-3);
 }
 
-.input[type='date']::-webkit-calendar-picker-indicator {
+.input[type="date"]::-webkit-calendar-picker-indicator {
 	filter: invert(1);
 }
 
-.input[type='file'] {
+.input[type="file"] {
 	padding: var(--size-2);
 }
 
-.input[type='file']::file-selector-button {
+.input[type="file"]::file-selector-button {
 	margin-right: var(--size-4);
 }
 
@@ -327,7 +369,7 @@ p {
 .list-plain {
 	display: flex;
 	flex-direction: column;
-	list-style-type: '';
+	list-style-type: "";
 	margin: 0;
 	padding: 0;
 }
@@ -344,8 +386,8 @@ p {
 .row {
 	display: grid;
 	grid-template:
-		'primary tertiary actions' auto
-		'secondary tertiary actions' auto / 1fr auto auto;
+		"primary tertiary actions" auto
+		"secondary tertiary actions" auto / 1fr auto auto;
 }
 
 .row:first-child .row__content {

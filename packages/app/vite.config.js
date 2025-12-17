@@ -1,65 +1,65 @@
-import path from 'path';
-import { svelte } from '@sveltejs/vite-plugin-svelte';
-import { defineConfig } from 'vite';
-import { VitePWA } from 'vite-plugin-pwa';
-import { viteStaticCopy } from 'vite-plugin-static-copy';
-import { title } from '../../package.json';
-import { description } from './package.json';
-import manifestIcons from '../assets/dist/manifest-icons.json';
+import path from "path";
+import { svelte } from "@sveltejs/vite-plugin-svelte";
+import { defineConfig } from "vite";
+import { VitePWA } from "vite-plugin-pwa";
+import { viteStaticCopy } from "vite-plugin-static-copy";
+import { title } from "../../package.json";
+import { description } from "./package.json";
+import manifestIcons from "../assets/dist/manifest-icons.json";
 
 export default defineConfig({
 	build: {
 		commonjsOptions: {
-			transformMixedEsModules: true
+			transformMixedEsModules: true,
 		},
 		modulePreload: false,
 		rollupOptions: {
 			output: {
-				entryFileNames: '[name].js',
+				entryFileNames: "[name].js",
 			},
 		},
-		target: 'esnext',
+		target: "esnext",
 	},
 	plugins: [
 		svelte({
-			emitCss: false
+			emitCss: false,
 		}),
 		viteStaticCopy({
 			targets: [
 				{
-					src: '../assets/dist/*.{ico,png,svg}',
-					dest: '.'
-				}
+					src: "../assets/dist/*.{ico,png,svg}",
+					dest: ".",
+				},
 			],
 		}),
 		VitePWA({
 			devOptions: {
 				enabled: true,
-				type: 'module',
+				type: "module",
 			},
-			filename: 'sw.js',
+			filename: "sw.js",
 			injectManifest: {
-				globPatterns: ['**/*.{css,html,ico,js,png,svg}'],
+				globPatterns: ["**/*.{css,html,ico,js,png,svg}"],
 			},
-			injectRegister: 'inline',
+			injectRegister: "inline",
 			manifest: {
 				name: title,
 				short_name: title,
 				description,
-				lang: 'en-US',
-				display: 'standalone',
-				background_color: '#1a1510', // base-20
-				theme_color: '#52453a', // base-40
-				orientation: 'portrait',
-				...manifestIcons
+				lang: "en-US",
+				display: "standalone",
+				background_color: "#1a1510", // base-20
+				theme_color: "#52453a", // base-40
+				orientation: "portrait",
+				...manifestIcons,
 			},
-			srcDir: 'src',
-			strategies: 'injectManifest',
+			srcDir: "src",
+			strategies: "injectManifest",
 		}),
 	],
 	resolve: {
 		alias: {
-			'@src': path.resolve(__dirname, 'src'),
+			"@src": path.resolve(__dirname, "src"),
 		},
 	},
 });
