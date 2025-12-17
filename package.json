@@ -1,5 +1,6 @@
 {
 	"name": "oncheckin-platform",
+	"title": "OnCheckIn",
 	"version": "1.0.0",
 	"private": true,
 	"description": "Membership and event management software for the Hash House Harriers running clubs.",

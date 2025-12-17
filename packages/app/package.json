@@ -2,7 +2,7 @@
 	"name": "@oncheckin/app",
 	"version": "1.0.0",
 	"private": true,
-	"description": "Admin app for managing club data.",
+	"description": "Manage running club data.",
 	"type": "module",
 	"scripts": {
 		"dev": "vite --open",
