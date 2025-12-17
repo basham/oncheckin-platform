@@ -5,7 +5,7 @@ const TAG = Symbol("tag");
 const ids = new Set();
 
 const schemas = {
-	date: z.iso().date(),
+	date: z.iso.date(),
 	id: z.cuid2().or(z.enum(ids)),
 	tag: z.literal(0).default(0),
 	text: z.string().trim().min(1),

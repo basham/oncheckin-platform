@@ -1,9 +1,7 @@
-import styleUrl from "@oncheckin/assets/src/style.css?url";
-
 import { registerRoute as originalRegisterRoute } from "workbox-routing";
-import { getAccount, getCurrentAccountId, getDevice, hasOrg } from "./api.js";
 import { Store } from "@src/api/computed/store.js";
-import { APP_NAME } from "./constants.js";
+import { getAccount, getCurrentAccountId, getDevice, hasOrg } from "./api.js";
+import { transformHead } from "./template.js";
 
 export function registerRoute(path, methods) {
 	const { get, post } = methods;
@@ -112,10 +110,6 @@ function createResponse(body, contentType, headers = {}) {
 	return new Response(body, options);
 }
 
-function createTitle(h1, h2) {
-	return [h2, h1, APP_NAME].filter((t) => t).join(" - ");
-}
-
 function regexFromPath(path) {
 	const p = path
 		// Replace `$key` with a group of the name name.
@@ -145,32 +139,21 @@ function respondWithDownloadJSON(data) {
 
 function respondWithTemplate(data) {
 	const entryBase = import.meta.env.DEV ? "/src" : "";
-	const { title = createTitle(data.h1, data.h2) } = data;
-	const body = `
+	const template = `
 <!DOCTYPE html>
 <html lang="en">
 	<head>
-		<title>${title}</title>
-		<meta charset="utf-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<meta name="description" content="Membership and event management software for Hash House Harriers.">
-		<meta name="mobile-web-app-capable" content="yes">
-		<meta name="apple-mobile-web-app-capable" content="yes">
-		<meta name="msapplication-starturl" content="/">
-		<meta name="theme-color" content="#190f05">
-		<link rel="manifest" href="/manifest.webmanifest">
-		<link rel="stylesheet" href="${styleUrl}">
-		<link rel="icon" href="/icon.svg" type="image/svg+xml">
-		<link rel="apple-touch-icon" href="/icon-192.png">
-		<link rel="preload" as="image" href="/icon.svg">
+		<!-- HEAD -->
 		<script id="data" type="application/json">
 	${JSON.stringify(data)}
 		</script>
 		<script type="module" crossorigin src="${entryBase}/index.js"></script>
-		</head>
+	</head>
 	<body>
 	</body>
 </html>
 `;
-	return respondWithHTML(body);
+	const options = { title: [data.h2, data.h1] };
+	const html = transformHead(template, options);
+	return respondWithHTML(html);
 }

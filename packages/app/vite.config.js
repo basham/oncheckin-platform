@@ -1,11 +1,9 @@
-import path from "path";
 import { svelte } from "@sveltejs/vite-plugin-svelte";
+import path from "path";
 import { defineConfig } from "vite";
 import { VitePWA } from "vite-plugin-pwa";
 import { viteStaticCopy } from "vite-plugin-static-copy";
-import { title } from "../../package.json";
-import { description } from "./package.json";
-import manifestIcons from "../assets/dist/manifest-icons.json";
+import { manifest, transformHead } from "./src/template.js"
 
 export default defineConfig({
 	build: {
@@ -32,6 +30,12 @@ export default defineConfig({
 				},
 			],
 		}),
+		{
+			name: "html-transform",
+			transformIndexHtml(html) {
+				return transformHead(html);
+			}
+		},
 		VitePWA({
 			devOptions: {
 				enabled: true,
@@ -42,17 +46,7 @@ export default defineConfig({
 				globPatterns: ["**/*.{css,html,ico,js,png,svg}"],
 			},
 			injectRegister: "inline",
-			manifest: {
-				name: title,
-				short_name: title,
-				description,
-				lang: "en-US",
-				display: "standalone",
-				background_color: "#1a1510", // base-20
-				theme_color: "#52453a", // base-40
-				orientation: "portrait",
-				...manifestIcons,
-			},
+			manifest,
 			srcDir: "src",
 			strategies: "injectManifest",
 		}),

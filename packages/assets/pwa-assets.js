@@ -18,7 +18,7 @@ async function run() {
 		...resolvedOptions,
 		imageResolver: () => readFile(imageName),
 		imageName,
-		htmlLinks: { xhtml: false, includeId: false },
+		htmlLinks: { xhtml: true, includeId: false },
 		basePath: "/",
 		resolveSvgName: (name) => basename(name),
 	});
@@ -28,9 +28,10 @@ async function run() {
 		generateManifestIconsEntry("string", resolvedInstructions),
 	);
 
+	const headLinks = generateHtmlMarkup(resolvedInstructions).join('\n');
 	await writeFile(
-		resolve(dist, "head-links.html"),
-		generateHtmlMarkup(resolvedInstructions),
+		resolve(dist, "metadata.js"),
+		`export const headLinks = \`${headLinks}\`;\n`
 	);
 }
 
