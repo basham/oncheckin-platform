@@ -5,7 +5,9 @@
 	"description": "Manage running club data.",
 	"type": "module",
 	"scripts": {
-		"dev": "vite --open",
+		"dev": "run-p dev:app dev:sync",
+		"dev:app": "vite --open",
+		"dev:sync": "jazz-run sync",
 		"build": "vite build",
 		"preview": "vite preview --open"
 	},
@@ -14,6 +16,8 @@
 		"@paralleldrive/cuid2": "3.0.4",
 		"date-fns": "4.1.0",
 		"hermetrics": "1.0.0",
+		"jazz-run": "0.19.14",
+		"jazz-tools": "0.19.14",
 		"qr-scanner": "1.4.2",
 		"qrious": "4.0.2",
 		"svelte": "5.46.0",
@@ -24,6 +28,7 @@
 	},
 	"devDependencies": {
 		"@sveltejs/vite-plugin-svelte": "6.2.1",
+		"npm-run-all": "4.1.5",
 		"vite": "7.3.0",
 		"vite-plugin-pwa": "1.2.0",
 		"vite-plugin-static-copy": "3.1.4",

@@ -4,6 +4,7 @@ dev-dist
 dist
 node_modules
 radata
+sync-db
 
 *.log
 .astro
