@@ -1,9 +1,13 @@
 import { co, z } from "jazz-tools";
 
+const CURRENT_SCHEMA_VERSION = 1;
+const now = () => new Date().toISOString();
+
 export const MetaComponent = co.map({
 	name: z.string().optional(),
 	description: z.string().optional(),
-	lastUpdatedAt: z.date().default(() => new Date()),
+	lastUpdatedAt: z.iso.datetime().default(now),
+	schemaVersion: z.number().int().default(CURRENT_SCHEMA_VERSION),
 });
 export type MetaComponent = co.loaded<typeof MetaComponent>;
 
@@ -20,7 +24,7 @@ export const CheckinComponent = co.map({
 	get event() {
 		return Entity;
 	},
-	lastCheckpointAt: z.date().optional(),
+	lastCheckpointAt: z.iso.datetime().optional(),
 	get person() {
 		return Entity;
 	},
@@ -30,7 +34,7 @@ export type CheckinComponent = co.loaded<typeof CheckinComponent>;
 
 export const EventComponent = co.map({
 	excludeFromTotal: z.boolean().optional(),
-	startsAt: z.iso.date(),
+	startsAt: z.iso.datetime(),
 });
 export type EventComponent = co.loaded<typeof EventComponent>;
 
@@ -48,6 +52,12 @@ export const TagComponent = co.map({
 });
 export type TagComponent = co.loaded<typeof TagComponent>;
 
+export const TagsComponent = co.record(
+	z.string(),
+	z.iso.datetime().default(now),
+);
+export type TagsComponent = co.loaded<typeof TagsComponent>;
+
 export const Entity = co.map({
 	meta: MetaComponent,
 	baselineOrganizerCheckins: co.optional(BaselineComponent),
@@ -57,7 +67,7 @@ export const Entity = co.map({
 	member: co.optional(MemberComponent),
 	person: co.optional(PersonComponent),
 	tag: co.optional(TagComponent),
-	tags: co.optional(co.record(z.string(), z.boolean().default(true))),
+	tags: co.optional(TagsComponent),
 });
 export type Entity = co.loaded<typeof Entity>;
 
@@ -66,20 +76,22 @@ export const Club = co.map({
 	baselineEvents: co.optional(BaselineComponent),
 	entities: co.record(z.string(), Entity),
 });
-export interface Club extends co.loaded<typeof Club> {}
+export type Club = co.loaded<typeof Club>;
 
-export const ClubAccount = co.map({
+export const AccountClub = co.map({
+	meta: MetaComponent,
 	club: Club,
-	lastOpenedAt: z.date(),
+	lastOpenedAt: z.iso.datetime().optional(),
 });
-export type ClubAccount = co.loaded<typeof ClubAccount>;
+export type AccountClub = co.loaded<typeof AccountClub>;
 
-export const RootAccount = co.map({
-	clubAccounts: co.record(z.string(), ClubAccount),
+export const AccountRoot = co.map({
+	meta: MetaComponent,
+	accountClubs: co.record(z.string(), AccountClub),
 });
-export interface RootAccount extends co.loaded<typeof RootAccount> {}
+export type AccountRoot = co.loaded<typeof AccountRoot>;
 
 export const Account = co.account({
-	root: RootAccount,
 	profile: co.profile(),
+	root: AccountRoot,
 });
