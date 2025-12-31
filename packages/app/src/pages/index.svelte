@@ -1,8 +1,10 @@
 <script>
+	import Auth from "./auth.svelte";
 	import Layout from "./layout.svelte";
 </script>
 
 <Layout>
+	<Auth />
 	<form autocomplete="off" method="post">
 		<div class="u-m-top-6">
 			<label for="deviceNameField">Device name</label>

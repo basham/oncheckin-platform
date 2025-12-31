@@ -5,14 +5,19 @@ import {
 	renameDevice,
 	setCurrentAccount,
 } from "@src/api.js";
+import { createContextManager } from "@src/api-jazz";
 
 const orgsPath = "/orgs/";
 
 export async function get({ data }) {
 	const { device } = data;
+
+	//const manager = await createContextManager();
+	//console.log('MM', manager);
+
 	if (device.state === "active") {
 		const redirect = orgsPath;
-		return { redirect };
+		//return { redirect };
 	}
 	const h1 = "Get started";
 	const template = { h1 };
