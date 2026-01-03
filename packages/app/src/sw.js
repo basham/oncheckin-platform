@@ -1,5 +1,4 @@
 import { cleanupOutdatedCaches, precacheAndRoute } from "workbox-precaching";
-import { updateContext } from "@src/api-jazz";
 import { registerRoute } from "./routing.js";
 
 cleanupOutdatedCaches();
@@ -10,13 +9,6 @@ self.addEventListener("message", (event) => {
 		self.skipWaiting();
 	}
 });
-
-const authChannel = new BroadcastChannel("jazz-auth-sync");
-authChannel.onmessage = async (event) => {
-	if (event.data.type === "AUTH_CHANGED") {
-		await updateContext();
-	}
-};
 
 const modules = import.meta.glob("./pages/**/*.js", { eager: true });
 

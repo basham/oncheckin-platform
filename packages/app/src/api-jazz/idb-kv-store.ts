@@ -1,5 +1,5 @@
 import { clear, del, get, set } from "idb-keyval";
-import { KvStore } from "jazz-tools";
+import { KvStore, KvStoreContext } from "jazz-tools";
 
 export class IdbKvStore implements KvStore {
 	constructor() {}
@@ -19,4 +19,11 @@ export class IdbKvStore implements KvStore {
 	async clearAll() {
 		await clear();
 	}
+}
+
+// Use IndexedDB for "jazz-logged-in-secret".
+export function initIdbKvStore() {
+	const store = new IdbKvStore();
+	KvStoreContext.getInstance().initialize(store);
+	return store;
 }

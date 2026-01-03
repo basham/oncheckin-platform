@@ -27,7 +27,8 @@ class LocalStorageShim {
 	}
 }
 
-export async function installShim() {
+// localStorage is required for Jazz sessions.
+export async function installLocalStorageShim() {
 	const saved = await entries();
 	(globalThis as any).localStorage = new LocalStorageShim(saved);
 }

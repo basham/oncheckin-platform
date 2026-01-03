@@ -9,8 +9,9 @@ import { getContext } from "@src/api-jazz";
 
 const orgsPath = "/orgs/";
 
-export async function get() {
-	const context = await getContext();
+export async function get({ data }) {
+	const forceUpdate = "auth" in data;
+	const context = await getContext({ forceUpdate });
 	if (context.isAuthenticated) {
 		const redirect = orgsPath;
 		return { redirect };

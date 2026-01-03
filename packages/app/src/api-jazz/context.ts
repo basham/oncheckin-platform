@@ -1,20 +1,20 @@
-import { KvStoreContext } from "jazz-tools";
 import { JazzBrowserContextManager } from "jazz-tools/browser";
-import { IdbKvStore } from "./idb-kv-store.ts";
-import { installShim } from "./local-storage-shim.ts";
+import { initIdbKvStore } from "./idb-kv-store.ts";
+import { installLocalStorageShim } from "./local-storage-shim.ts";
 import { Account } from "./schema.ts";
 
 let manager: JazzBrowserContextManager<typeof Account> | undefined;
 
-export async function getContext() {
-	if (!manager) {
-		// Install localStorage shim, because it is required for Jazz sessions.
-		await installShim();
-		// Use IndexedDB for "jazz-logged-in-secret".
-		const store = new IdbKvStore();
-		KvStoreContext.getInstance().initialize(store);
-		// Set up context.
+type ContextOptions = { forceUpdate?: boolean };
+
+export async function getContext(options: ContextOptions = {}) {
+	const initiate = !manager;
+	if (initiate) {
+		await installLocalStorageShim();
+		initIdbKvStore();
 		manager = new JazzBrowserContextManager();
+	}
+	if (initiate || options.forceUpdate) {
 		await updateContext();
 	}
 	return {
