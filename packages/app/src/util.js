@@ -18,6 +18,13 @@ export function focus(id) {
 	waitForElement(id, (el) => el.focus());
 }
 
+export function getInstallStatus() {
+	const isInstalled =
+		window.matchMedia("(display-mode: standalone)").matches ||
+		window.navigator.standalone; // Specific for iOS Safari
+	return { isInstalled };
+}
+
 export function getOrCreate(cache, key, createCallback) {
 	if (!cache.has(key)) {
 		cache.set(key, createCallback());

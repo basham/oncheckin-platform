@@ -1,31 +1,45 @@
 <script>
-	import Auth from "./auth.svelte";
+	import { onMount } from "svelte";
+	import { createPasskeyAuth } from "@src/api-jazz/auth.ts";
+	import { getInstallStatus } from "@src/util.js";
 	import Layout from "./layout.svelte";
+
+	const { isInstalled } = getInstallStatus();
+	let auth = null;
+
+	onMount(async () => {
+		auth = await createPasskeyAuth();
+	});
+
+	async function handleAuth(fn) {
+		if (!auth) {
+			return;
+		}
+		await fn();
+		window.location = "?auth";
+	}
+
+	async function signUp() {
+		handleAuth(() => auth.signUp(""));
+	}
+
+	async function logIn() {
+		handleAuth(() => auth.logIn());
+	}
 </script>
 
 <Layout>
-	<Auth />
-	<form autocomplete="off" method="post">
-		<div class="u-m-top-6">
-			<label for="deviceNameField">Device name</label>
-			<br />
-			<input class="input" id="deviceNameField" name="deviceName" type="text" />
+	{#if !isInstalled}
+		<div class="card u-m-top-6">
+			<p><a href="/install">Install this app</a> before logging in for the best experience.</p>
 		</div>
-		<div class="u-m-top-6">
-			<label for="accountNameField">Account name</label>
-			<br />
-			<input
-				class="input"
-				id="accountNameField"
-				name="accountName"
-				type="text"
-			/>
-		</div>
-		<div class="u-m-top-6">
-			<button class="button button--primary" type="submit">Continue</button>
-		</div>
-		<div class="u-m-top-6">
-			<a href="/">Cancel</a>
-		</div>
-	</form>
+	{/if}
+	<div class="u-m-top-6">
+		<button class="button button--primary" type="button" onclick={logIn}>
+			Log in with passkey
+		</button>
+	</div>
+	<div class="u-m-top-6">
+		<button class="button" type="button" onclick={signUp}> Sign up </button>
+	</div>
 </Layout>
