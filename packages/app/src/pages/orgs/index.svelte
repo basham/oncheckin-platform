@@ -7,6 +7,7 @@
 	<div class="u-m-top-4">{account.name} ({device.name})</div>
 	<div class="u-flex u-gap-4 u-m-top-6">
 		<a class="button button--primary" href="/orgs/add/">Add organization</a>
+		<a href="/logout">Log out</a>
 	</div>
 	{#if orgs.length}
 		<h2>All organizations</h2>

@@ -6,8 +6,8 @@ const now = () => new Date().toISOString();
 export const MetaComponent = co.map({
 	name: z.string().optional(),
 	description: z.string().optional(),
-	lastUpdatedAt: z.iso.datetime().default(now),
-	schemaVersion: z.number().int().default(CURRENT_SCHEMA_VERSION),
+	lastUpdatedAt: z.iso.datetime().default(now).optional(),
+	schemaVersion: z.number().int().default(CURRENT_SCHEMA_VERSION).optional(),
 });
 export type MetaComponent = co.loaded<typeof MetaComponent>;
 
@@ -91,7 +91,16 @@ export const AccountRoot = co.map({
 });
 export type AccountRoot = co.loaded<typeof AccountRoot>;
 
-export const Account = co.account({
-	profile: co.profile(),
-	root: AccountRoot,
-});
+export const Account = co
+	.account({
+		profile: co.profile(),
+		root: AccountRoot,
+	})
+	.withMigration((account) => {
+		if (!account.$jazz.has("root")) {
+			account.$jazz.set("root", {
+				meta: {},
+				accountClubs: {},
+			});
+		}
+	});

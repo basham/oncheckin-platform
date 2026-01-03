@@ -48,6 +48,7 @@
 					<NavLink href={`${org.url}settings/`} id="settings" {location}>
 						Settings
 					</NavLink>
+					<a href="/logout">Log out</a>
 				</nav>
 			</div>
 		</div>

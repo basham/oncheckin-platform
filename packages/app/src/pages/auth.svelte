@@ -1,18 +1,25 @@
 <script>
-	import { BrowserPasskeyAuth, JazzBrowserContextManager } from "jazz-tools/browser";
+	import { KvStoreContext } from "jazz-tools";
+	import {
+		BrowserPasskeyAuth,
+		JazzBrowserContextManager,
+	} from "jazz-tools/browser";
 	import { onMount } from "svelte";
-	import { Account } from "@src/api-jazz";
+	import { IdbKvStore } from "@src/api-jazz";
 
+	const authChannel = new BroadcastChannel("jazz-auth-sync");
+	const authChanged = () => authChannel.postMessage({ type: "AUTH_CHANGED" });
 	let auth = null;
 
 	onMount(async () => {
+		// Use IndexedDB for "jazz-logged-in-secret".
+		const store = new IdbKvStore();
+		KvStoreContext.getInstance().initialize(store);
 		const contextManager = new JazzBrowserContextManager();
 		await contextManager.createContext({
 			sync: {
-				peer: "ws://127.0.0.1:4200",
-				when: "always",
+				when: "never",
 			},
-			AccountSchema: Account
 		});
 		const context = contextManager.getCurrentValue();
 		const authSecretStorage = contextManager.getAuthSecretStorage();
@@ -24,10 +31,23 @@
 			appName,
 		);
 		const out = {
-			signUp: () => _auth.signUp(""),
-			logIn: () => _auth.logIn(),
-			logOut: () => context.logOut(),
-			get state() { return authSecretStorage.isAuthenticated; }
+			signUp: async () => {
+				await _auth.signUp("");
+				authChanged();
+				window.location = "/orgs";
+			},
+			logIn: async () => {
+				await _auth.logIn();
+				authChanged();
+				window.location = "/orgs";
+			},
+			logOut: () => {
+				context.logOut();
+				authChanged();
+			},
+			get state() {
+				return authSecretStorage.isAuthenticated;
+			},
 		};
 		auth = out;
 		const unsubscribe = authSecretStorage.onUpdate(() => {
@@ -37,7 +57,11 @@
 	});
 </script>
 
-<button class="button button--primary" type="button" onclick={auth.signUp}>Sign up</button>
-<button class="button button--primary" type="button" onclick={auth.logIn}>Log in</button>
-<button class="button button--primary" type="button" onclick={auth.logOut}>Log out</button>
-{auth?.state}
+<div class="u-m-top-6">
+	<button class="button button--primary" type="button" onclick={auth.signUp}
+		>Sign up</button
+	>
+	<button class="button button--primary" type="button" onclick={auth.logIn}
+		>Log in with passkey</button
+	>
+</div>
