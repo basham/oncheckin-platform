@@ -1,7 +1,7 @@
 import { co, z } from "jazz-tools";
 
-const CURRENT_SCHEMA_VERSION = 1;
-const now = () => new Date().toISOString();
+export const CURRENT_SCHEMA_VERSION = 1;
+export const now = () => new Date().toISOString();
 
 export const MetaComponent = co.map({
 	name: z.string().optional(),

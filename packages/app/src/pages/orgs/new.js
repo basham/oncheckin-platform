@@ -1,4 +1,4 @@
-import { addOrg, createOrg } from "@src/api.js";
+import { getContext, now, AccountClub, Club } from "@src/api-jazz";
 
 export async function get() {
 	const h1 = "New organization";
@@ -6,11 +6,26 @@ export async function get() {
 	return { template };
 }
 
-export async function post({ data, request }) {
-	const { account } = data;
+export async function post({ request }) {
+	const context = await getContext();
 	const formData = await request.formData();
 	const name = formData.get("name");
-	const { id, url: redirect } = await createOrg(name);
-	await addOrg(account.id, id);
+	const club = Club.create({
+		meta: { name },
+		entities: {},
+	});
+	const accountClub = AccountClub.create({
+		club,
+		lastOpenedAt: now(),
+	});
+	const { root } = await context.me.$jazz.ensureLoaded({
+		resolve: {
+			root: {
+				accountClubs: true,
+			},
+		},
+	});
+	root.accountClubs.$jazz.set(accountClub.$jazz.id, accountClub);
+	const redirect = `/orgs/?id=${club.$jazz.id}`;
 	return { redirect };
 }

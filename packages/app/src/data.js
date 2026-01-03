@@ -3,6 +3,7 @@ const data = raw ? JSON.parse(raw) : { route: "index" };
 
 export { data };
 export const {
+	_tmp,
 	account,
 	checkIn,
 	checkIns,
