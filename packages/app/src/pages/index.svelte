@@ -31,7 +31,9 @@
 <Layout>
 	{#if !isInstalled}
 		<div class="card u-m-top-6">
-			<p><a href="/install">Install this app</a> before logging in for the best experience.</p>
+			<p>
+				<a href="/install">Install this app</a> before logging in for the best experience.
+			</p>
 		</div>
 	{/if}
 	<div class="u-m-top-6">
