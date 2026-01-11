@@ -6,14 +6,15 @@ export const now = () => new Date().toISOString();
 export const MetaComponent = co.map({
 	name: z.string().optional(),
 	description: z.string().optional(),
-	lastUpdatedAt: z.iso.datetime().default(now).optional(),
-	schemaVersion: z.number().int().default(CURRENT_SCHEMA_VERSION).optional(),
+	lastUpdatedAt: z.iso.datetime().optional(),
+	lastViewedAt: z.iso.datetime().optional(),
+	schemaVersion: z.number().int().default(CURRENT_SCHEMA_VERSION),
 });
 export type MetaComponent = co.loaded<typeof MetaComponent>;
 
 export const BaselineComponent = co.map({
-	total: z.number().int().min(0),
 	asOfDate: z.iso.date(),
+	number: z.number().int().min(0),
 });
 export type BaselineComponent = co.loaded<typeof BaselineComponent>;
 
@@ -21,86 +22,80 @@ export const CheckinRole = z
 	.enum(["participant", "organizer"])
 	.default("participant");
 export const CheckinComponent = co.map({
-	get event() {
-		return Entity;
-	},
-	lastCheckpointAt: z.iso.datetime().optional(),
-	get person() {
-		return Entity;
-	},
 	role: CheckinRole,
 });
 export type CheckinComponent = co.loaded<typeof CheckinComponent>;
 
 export const EventComponent = co.map({
-	excludeFromTotal: z.boolean().optional(),
 	startsAt: z.iso.datetime(),
 });
 export type EventComponent = co.loaded<typeof EventComponent>;
 
-export const MemberComponent = co.map({
-	name: z.string().optional(),
+export const PersonComponent = co.map({
+	nickname: z.string().optional(),
 });
-export type MemberComponent = co.loaded<typeof MemberComponent>;
-
-export const PersonComponent = co.map({});
 export type PersonComponent = co.loaded<typeof PersonComponent>;
 
-export const TagTargetTypes = z.enum(["checkin", "event", "member", "person"]);
+export const LinkComponent = co.map({
+	get from() {
+		return Entity;
+	},
+	get to() {
+		return Entity;
+	},
+});
+export type LinkComponent = co.loaded<typeof LinkComponent>;
+
+export const RootComponent = co.map({
+	get root() {
+		return Root;
+	},
+});
+export type RootComponent = co.loaded<typeof RootComponent>;
+
+export const SequenceComponent = co.map({
+	mode: z.enum(["auto", "custom", "ignore"]).default("auto"),
+	number: z.number().int().positive().optional(),
+});
+export type SequenceComponent = co.loaded<typeof SequenceComponent>;
+
+export const TagParents = z.enum(["checkin", "event", "person"]);
 export const TagComponent = co.map({
-	targetType: TagTargetTypes,
+	childOf: TagParents,
 });
 export type TagComponent = co.loaded<typeof TagComponent>;
 
-export const TagsComponent = co.record(
-	z.string(),
-	z.iso.datetime().default(now),
-);
-export type TagsComponent = co.loaded<typeof TagsComponent>;
-
 export const Entity = co.map({
 	meta: MetaComponent,
-	baselineOrganizerCheckins: co.optional(BaselineComponent),
-	baselineParticipantCheckins: co.optional(BaselineComponent),
+	baseline: co.optional(BaselineComponent),
 	checkin: co.optional(CheckinComponent),
+	club: co.optional(RootComponent),
 	event: co.optional(EventComponent),
-	member: co.optional(MemberComponent),
+	link: co.optional(LinkComponent),
 	person: co.optional(PersonComponent),
+	sequence: co.optional(SequenceComponent),
 	tag: co.optional(TagComponent),
-	tags: co.optional(TagsComponent),
+	get tags() {
+		return co.optional(co.list(Entity));
+	}
 });
 export type Entity = co.loaded<typeof Entity>;
 
-export const Club = co.map({
+export const Root = co.map({
 	meta: MetaComponent,
-	baselineEvents: co.optional(BaselineComponent),
-	entities: co.record(z.string(), Entity),
+	entities: co.optional(co.record(z.string(), Entity)),
 });
-export type Club = co.loaded<typeof Club>;
-
-export const AccountClub = co.map({
-	meta: MetaComponent,
-	club: Club,
-	lastOpenedAt: z.iso.datetime().optional(),
-});
-export type AccountClub = co.loaded<typeof AccountClub>;
-
-export const AccountRoot = co.map({
-	meta: MetaComponent,
-	accountClubs: co.record(z.string(), AccountClub),
-});
-export type AccountRoot = co.loaded<typeof AccountRoot>;
+export type Root = co.loaded<typeof Root>;
 
 export const Account = co
 	.account({
 		profile: co.profile(),
-		root: AccountRoot,
+		root: Root,
 	})
 	.withMigration((account) => {
 		if (!account.$jazz.has("root")) {
 			account.$jazz.set("root", {
-				meta: {},
-				accountClubs: {},
+				entities: {}
 			});
 		}
 	});

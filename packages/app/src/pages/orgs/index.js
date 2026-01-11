@@ -9,17 +9,20 @@ export async function get({ data }) {
 	const me = await context.me.$jazz.ensureLoaded({
 		resolve: {
 			root: {
-				accountClubs: {
+				entities: {
 					$each: {
+						meta: true,
 						club: {
-							meta: true,
-						},
+							root: {
+								meta: true
+							}
+						}
 					},
 				},
 			},
 		},
 	});
-	const _tmp = me.root.accountClubs;
+	const _tmp = me.root.entities;
 	const template = { h1, orgs, _tmp };
 	return { template };
 }

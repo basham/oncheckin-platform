@@ -3,10 +3,12 @@
 	import { sortDesc } from "@src/util.js";
 	import Layout from "@src/pages/layout.svelte";
 
+	console.log('##', _tmp);
+
 	const accountClubs = Object.entries(_tmp)
 		.filter(([k]) => k !== "$jazz")
 		.map(([k, v]) => v)
-		.sort(sortDesc((v) => v.lastOpenedAt));
+		.sort(sortDesc((v) => v.meta.lastViewedAt));
 </script>
 
 <Layout>
@@ -20,11 +22,11 @@
 		<ul class="list-plain u-gap-2px u-m-top-2">
 			{#each accountClubs as ac}
 				<li class="row">
-					<a class="row__content" href={`/orgs/${ac.club.$jazz.id}`}>
-						<div class="row__primary">{ac.club.meta.name}</div>
+					<a class="row__content" href={`/orgs/${ac.club.root.$jazz.id}`}>
+						<div class="row__primary">{ac.club.root.meta.name}</div>
 						<div class="row__secondary">
-							<div>{`ID: ${ac.club.$jazz.id.slice(-4)}`}</div>
-							<div>{`Last opened: ${ac.lastOpenedAt}`}</div>
+							<div>{`ID: ${ac.club.root.$jazz.id.slice(-4)}`}</div>
+							<div>{`Last opened: ${ac.meta.lastViewedAt}`}</div>
 						</div>
 					</a>
 				</li>
