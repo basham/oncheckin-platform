@@ -1,4 +1,4 @@
-import { getContext, now, Entity, Root } from "@src/api-jazz";
+import { getContext, schemaVersion, now, Entity, Root } from "@src/api-jazz";
 
 export async function get() {
 	const h1 = "New organization";
@@ -11,29 +11,22 @@ export async function post({ request }) {
 	const formData = await request.formData();
 	const name = formData.get("name");
 	const club = Root.create({
-		meta: { name },
+		meta: {
+			name,
+			schemaVersion,
+		},
 		entities: {},
 	});
 	const accountClub = Entity.create({
 		meta: {
-			lastViewedAt: now()
+			lastViewedAt: now(),
+			schemaVersion,
 		},
 		club: {
-			root: club
-		}
-	});
-	const { root } = await context.me.$jazz.ensureLoaded({
-		resolve: {
-			root: {
-				entities: true,
-			},
+			root: club,
 		},
 	});
-	if (!root.entities) {
-		root.$jazz.set("entities", {});
-	}
-	root.entities.$jazz.set(accountClub.$jazz.id, accountClub);
-	console.log('JJ', club.toJSON(), accountClub.toJSON())
-	const redirect = `/orgs/?id=${accountClub.$jazz.id}`;
+	context.me.root.entities.$jazz.set(accountClub.$jazz.id, accountClub);
+	const redirect = `/orgs/?id=${club.$jazz.id}`;
 	return { redirect };
 }

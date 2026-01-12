@@ -1,6 +1,7 @@
 import { co, z } from "jazz-tools";
 
 export const CURRENT_SCHEMA_VERSION = 1;
+export const schemaVersion = CURRENT_SCHEMA_VERSION;
 export const now = () => new Date().toISOString();
 
 export const MetaComponent = co.map({
@@ -8,7 +9,7 @@ export const MetaComponent = co.map({
 	description: z.string().optional(),
 	lastUpdatedAt: z.iso.datetime().optional(),
 	lastViewedAt: z.iso.datetime().optional(),
-	schemaVersion: z.number().int().default(CURRENT_SCHEMA_VERSION),
+	schemaVersion: z.number().int(),
 });
 export type MetaComponent = co.loaded<typeof MetaComponent>;
 
@@ -18,9 +19,7 @@ export const BaselineComponent = co.map({
 });
 export type BaselineComponent = co.loaded<typeof BaselineComponent>;
 
-export const CheckinRole = z
-	.enum(["participant", "organizer"])
-	.default("participant");
+export const CheckinRole = z.enum(["participant", "organizer"]);
 export const CheckinComponent = co.map({
 	role: CheckinRole,
 });
@@ -54,7 +53,7 @@ export const RootComponent = co.map({
 export type RootComponent = co.loaded<typeof RootComponent>;
 
 export const SequenceComponent = co.map({
-	mode: z.enum(["auto", "custom", "ignore"]).default("auto"),
+	mode: z.enum(["auto", "custom", "ignore"]),
 	number: z.number().int().positive().optional(),
 });
 export type SequenceComponent = co.loaded<typeof SequenceComponent>;
@@ -77,13 +76,13 @@ export const Entity = co.map({
 	tag: co.optional(TagComponent),
 	get tags() {
 		return co.optional(co.list(Entity));
-	}
+	},
 });
 export type Entity = co.loaded<typeof Entity>;
 
 export const Root = co.map({
 	meta: MetaComponent,
-	entities: co.optional(co.record(z.string(), Entity)),
+	entities: co.record(z.string(), Entity),
 });
 export type Root = co.loaded<typeof Root>;
 
@@ -95,7 +94,10 @@ export const Account = co
 	.withMigration((account) => {
 		if (!account.$jazz.has("root")) {
 			account.$jazz.set("root", {
-				entities: {}
+				meta: {
+					schemaVersion: CURRENT_SCHEMA_VERSION,
+				},
+				entities: {},
 			});
 		}
 	});

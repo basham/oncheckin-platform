@@ -14,9 +14,9 @@ export async function get({ data }) {
 						meta: true,
 						club: {
 							root: {
-								meta: true
-							}
-						}
+								meta: true,
+							},
+						},
 					},
 				},
 			},
