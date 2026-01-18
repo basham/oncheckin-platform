@@ -3,8 +3,6 @@
 	import { sortDesc } from "@src/util.js";
 	import Layout from "@src/pages/layout.svelte";
 
-	console.log("##", _tmp);
-
 	const accountClubs = Object.entries(_tmp)
 		.filter(([k]) => k !== "$jazz")
 		.map(([k, v]) => v)
