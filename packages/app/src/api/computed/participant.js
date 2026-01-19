@@ -14,33 +14,34 @@ export function getParticipantData(source) {
 }
 
 function getParticipants(source) {
-	const { store } = source;
-	return store
-		.getEntities()
+	const { root } = source;
+	return [...Object.values(root.entities)]
 		.map((entity) => getParticipant(entity, source))
 		.filter((participant) => participant)
 		.sort(sortAsc("displayName"));
 }
 
 function getParticipant(entity, source) {
-	const { store, org } = source;
-	const person = entity.get(components.person);
+	const { org } = source;
+	const { meta, person } = entity;
 	if (!person) {
 		return;
 	}
-	const { id } = entity;
-	const { location = "", notes = "" } = person;
-	const member = entity.get(components.member) || {};
-	const { name: alias = "" } = member;
-	const fullName = person.name || DEFAULT_NAME;
+	const { id } = entity.$jazz;
+	const { location = "" } = person;
+	const { description: notes } = meta;
+	const { nickname: alias = "" } = person;
+	const fullName = meta.name || DEFAULT_NAME;
 	const displayName = alias || `Just ${fullName}`;
 	const url = `${org.url}participants/${id}/`;
+	/*
 	const attendsCount = store
 		.getEntity(id, components.attends)
 		?.get(components.count);
 	const organizesCount = store
 		.getEntity(id, components.organizes)
 		?.get(components.count);
+	*/
 	return {
 		id,
 		alias,
@@ -48,8 +49,8 @@ function getParticipant(entity, source) {
 		fullName,
 		location,
 		notes,
-		attendsCount,
-		organizesCount,
+		attendsCount: 0,
+		organizesCount: 0,
 		url,
 	};
 }

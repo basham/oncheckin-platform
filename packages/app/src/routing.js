@@ -77,11 +77,11 @@ async function getParams(source = {}) {
 }
 
 async function getOrgFromParams(key, { org: oid }) {
-	const accountId = await getCurrentAccountId();
-	if (await hasOrg(accountId, oid)) {
+	//const accountId = await getCurrentAccountId();
+	//if (await hasOrg(accountId, oid)) {
 		const { org } = await Store(oid);
 		return [key, org];
-	}
+	//}
 }
 
 async function getEventFromParams(key, { org: oid, event: eid }) {

@@ -8,11 +8,11 @@ const RETURNERS_TIME_PERIOD = { months: 2 };
 
 export function getCheckInData(source) {
 	const { store, eventsById, participants } = source;
-	const indexes = getCheckInIndexes(store);
+	const indexes = getCheckInIndexes(source);
 
 	const aEntries = participants.map((p) => [
 		p.id,
-		getParticipantCheckIns(store, eventsById, indexes, p),
+		getParticipantCheckIns(source, eventsById, indexes, p),
 	]);
 	const checkInsByParticipantId = new Map(aEntries);
 
@@ -40,18 +40,21 @@ export function getCheckInData(source) {
 	};
 }
 
-function getCheckInIndexes(store) {
+function getCheckInIndexes(source) {
+	const { root } = source;
 	const byCheckInId = new Map();
 	const byEventId = new Map();
 	const byParticipantId = new Map();
 
-	for (const entity of store.getEntities()) {
+	for (const entity of [...Object.values(root.entities)]) {
+		/*
 		if (entity.has(components.rel) && entity.has(components.attends)) {
 			const { source: pid, target: eid } = entity.get(components.rel);
 			byCheckInId.set(entity.id, entity);
 			getOrCreate(byEventId, eid, () => new Set()).add(pid);
 			getOrCreate(byParticipantId, pid, () => new Set()).add(eid);
 		}
+		*/
 	}
 
 	return { byCheckInId, byEventId, byParticipantId };

@@ -25,12 +25,11 @@ export function getEventData(source) {
 }
 
 function getEvents(source) {
-	const { store } = source;
-	const events = store
-		.getEntities()
+	const { root } = source;
+	const events = [...Object.values(root.entities)]
 		.map((entity) => getEvent(entity, source))
 		.filter((event) => event);
-	const eventCount = getEventCount(store, events);
+	const eventCount = getEventCount(source, events);
 	return events.sort(sortDesc("dateObj")).map((event, i) => {
 		const count = eventCount - i;
 		return { ...event, count };
@@ -39,21 +38,21 @@ function getEvents(source) {
 
 function getEvent(entity, source) {
 	const { org } = source;
-	const event = entity.get(components.event);
+	const { event } = entity;
 	if (!event) {
 		return;
 	}
-	const date = event.date;
+	const { startsAt: date } = event;
 	if (!date) {
 		return;
 	}
-	const { id } = entity;
+	const { id } = entity.$jazz;
 	const dateObj = parseISO(date);
 	const displayDate = format(dateObj, "PP");
 	const displayDateMedium = format(dateObj, "E, MMM d");
 	const displayDateLong = format(dateObj, "E, PP");
 	const year = format(dateObj, "y");
-	const name = event.name.trim() || DEFAULT_NAME;
+	const name = entity.meta.name.trim() || DEFAULT_NAME;
 	const url = `${org.url}${PATH}/${id}/`;
 	return {
 		id,
@@ -68,7 +67,8 @@ function getEvent(entity, source) {
 	};
 }
 
-function getEventCount(store, events) {
+function getEventCount(source, events) {
+	return events.length;
 	const entity = store.getEntity(components.org, components.event);
 	if (!entity) {
 		return events.length;

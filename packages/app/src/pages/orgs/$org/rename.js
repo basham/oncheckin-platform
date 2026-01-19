@@ -1,4 +1,4 @@
-import { renameOrg } from "@src/api.js";
+import { Store } from "@src/api/computed/store.js";
 
 export async function get() {
 	const h1 = "Rename organization";
@@ -8,9 +8,10 @@ export async function get() {
 
 export async function post({ data, request }) {
 	const { org } = data;
+	const { root } = await Store(org.id);
 	const formData = await request.formData();
 	const name = formData.get("name");
-	await renameOrg(org.id, name);
+	root.meta.$jazz.set("name", name);
 	const redirect = `${org.url}settings`;
 	return { redirect };
 }

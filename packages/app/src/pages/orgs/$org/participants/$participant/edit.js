@@ -1,3 +1,4 @@
+import { Entity } from "@src/api-jazz";
 import { setParticipant } from "@src/api.js";
 
 export async function get({ data }) {
@@ -9,17 +10,21 @@ export async function get({ data }) {
 }
 
 export async function post({ data, request }) {
-	const { org, participant } = data;
+	const { participant } = data;
 	const formData = await request.formData();
-	const personName = formData.get("fullName");
-	const memberName = formData.get("alias");
+	const name = formData.get("fullName");
+	const nickname = formData.get("alias");
 	const location = formData.get("location");
-	const notes = formData.get("notes");
-	const { url: redirect } = await setParticipant(org.id, participant.id, {
-		personName,
-		memberName,
-		location,
-		notes,
+	const description = formData.get("notes");
+	const entity = await Entity.load(participant.id, {
+		resolve: {
+			meta: true,
+			person: true,
+		}
 	});
+	entity.meta.$jazz.set("name", name);
+	entity.meta.$jazz.set("description", description);
+	entity.person.$jazz.set("nickname", nickname);
+	const { url: redirect } = participant;
 	return { redirect };
 }

@@ -1,4 +1,5 @@
-import { createEvent } from "@src/api.js";
+import { Store } from "@src/api/computed/store.js";
+import { schemaVersion, Entity } from "@src/api-jazz";
 import { todayDate } from "@src/util.js";
 
 export async function get() {
@@ -10,9 +11,20 @@ export async function get() {
 
 export async function post({ data, request }) {
 	const { org } = data;
+	const { root } = await Store(org.id);
 	const formData = await request.formData();
 	const name = formData.get("name");
 	const date = formData.get("date");
-	const { url: redirect } = await createEvent(org.id, { name, date });
+	const event = Entity.create({
+		meta: {
+			name,
+			schemaVersion,
+		},
+		event: {
+			startsAt: date,
+		},
+	});
+	root.entities.$jazz.set(event.$jazz.id, event);
+	const redirect = `orgs/${root.$jazz.id}/event/${event.$jazz.id}/`;
 	return { redirect };
 }

@@ -4,10 +4,9 @@ const DEFAULT_NAME = "(Organization)";
 const PATH = "orgs";
 
 export function getOrgData(source) {
-	const { store } = source;
-	const json = getJSON(store);
-	const org = getOrg(store);
-	const orgEvent = getOrgEvent(store);
+	const json = getJSON(source);
+	const org = getOrg(source);
+	const orgEvent = getOrgEvent(source);
 	return {
 		...source,
 		json,
@@ -16,14 +15,14 @@ export function getOrgData(source) {
 	};
 }
 
-function getJSON(store) {
-	return store.data.toJSON();
+function getJSON(source) {
+	return source.root.toJSON();
 }
 
-function getOrg(store) {
-	const { id } = store;
-	const entity = store.getEntity(components.org);
-	const { name = DEFAULT_NAME } = entity.get(components.org) || {};
+function getOrg(source) {
+	const { root } = source;
+	const { id } = root.$jazz;
+	const { name = DEFAULT_NAME } = root.meta;
 	const url = `/${PATH}/${id}/`;
 	const openUrl = `${url}open/`;
 	const inviteCode = self.btoa(JSON.stringify({ id, name }));
@@ -38,6 +37,11 @@ function getOrg(store) {
 	};
 }
 
-function getOrgEvent(store) {
-	return store.getEntity(components.org, components.event)?.value;
+function getOrgEvent(source) {
+	const count = {
+		date: "2025-01-01",
+		value: 0
+	}
+	return { count };
+	//return store.getEntity(components.org, components.event)?.value;
 }

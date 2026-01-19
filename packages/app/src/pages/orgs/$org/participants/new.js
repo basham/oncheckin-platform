@@ -1,4 +1,5 @@
-import { createParticipant } from "@src/api.js";
+import { Store } from "@src/api/computed/store.js";
+import { schemaVersion, Entity } from "@src/api-jazz";
 
 export async function get() {
 	const h1 = "New hasher";
@@ -8,12 +9,20 @@ export async function get() {
 
 export async function post({ data, request }) {
 	const { org } = data;
+	const { root } = await Store(org.id);
 	const formData = await request.formData();
-	const personName = formData.get("fullName");
-	const memberName = formData.get("alias");
-	const { url: redirect } = await createParticipant(org.id, {
-		personName,
-		memberName,
+	const name = formData.get("fullName");
+	const nickname = formData.get("alias");
+	const person = Entity.create({
+		meta: {
+			name,
+			schemaVersion,
+		},
+		person: {
+			nickname,
+		},
 	});
+	root.entities.$jazz.set(person.$jazz.id, person);
+	const redirect = `orgs/${root.$jazz.id}/participants/${person.$jazz.id}/`;
 	return { redirect };
 }
