@@ -20,7 +20,7 @@ export async function post({ data, request }) {
 		resolve: {
 			meta: true,
 			person: true,
-		}
+		},
 	});
 	entity.meta.$jazz.set("name", name);
 	entity.meta.$jazz.set("description", description);

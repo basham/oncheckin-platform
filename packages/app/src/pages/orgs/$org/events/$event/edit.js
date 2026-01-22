@@ -17,7 +17,7 @@ export async function post({ data, request }) {
 		resolve: {
 			meta: true,
 			event: true,
-		}
+		},
 	});
 	entity.meta.$jazz.set("name", name);
 	entity.event.$jazz.set("startsAt", date);

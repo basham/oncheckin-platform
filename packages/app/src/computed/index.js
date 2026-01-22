@@ -1,10 +1,8 @@
 import { getContext, Root } from "@src/core";
 import { getOrCreate } from "@src/util/collections.js";
 
-const modules = import.meta.glob('./!(index).js', { eager: true });
+const modules = import.meta.glob("./!(index).js", { eager: true });
 const projections = new Map();
-
-console.log('MM', modules);
 
 export async function getProjection(rootId) {
 	return getOrCreate(projections, rootId, async () => {
@@ -17,9 +15,9 @@ export async function getProjection(rootId) {
 						meta: true,
 						event: true,
 						person: true,
-					}
-				}
-			}
+					},
+				},
+			},
 		});
 
 		const projection = { root };
@@ -30,7 +28,7 @@ export async function getProjection(rootId) {
 					const key = path.match(/([^/]+)\.[^.]+$/)[1];
 					defineLazyProperty(projection, key, compute);
 				}
-			};
+			}
 		};
 
 		init();
@@ -54,6 +52,6 @@ function defineLazyProperty(obj, propName, computeFn) {
 			});
 			*/
 			return value;
-		}
+		},
 	});
 }

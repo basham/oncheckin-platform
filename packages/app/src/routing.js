@@ -79,8 +79,8 @@ async function getParams(source = {}) {
 async function getOrgFromParams(key, { org: oid }) {
 	//const accountId = await getCurrentAccountId();
 	//if (await hasOrg(accountId, oid)) {
-		const { org } = await getProjection(oid);
-		return [key, org];
+	const { org } = await getProjection(oid);
+	return [key, org];
 	//}
 }
 
