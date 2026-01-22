@@ -1,15 +1,17 @@
 <script>
-	import {
+	import data from "@src/data.js";
+	import Layout from "@src/pages/orgs/$org/layout.svelte";
+	import Events from "@src/lib/events.svelte";
+	import Participants from "@src/lib/participants.svelte";
+
+	const {
 		h1,
 		events,
 		eventsWithFewestParticipants,
 		eventsWithMostParticipants,
 		participantsWithMostAttendances,
 		participantsWithMostOrganizes,
-	} from "@src/data.js";
-	import Layout from "@src/pages/orgs/$org/layout.svelte";
-	import Events from "@src/lib/events.svelte";
-	import Participants from "@src/lib/participants.svelte";
+	} = data;
 </script>
 
 <Layout location="events">

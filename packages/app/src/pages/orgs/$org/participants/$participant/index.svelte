@@ -1,7 +1,9 @@
 <script>
-	import { checkInsByYear } from "@src/data.js";
+	import data from "@src/data.js";
 	import { pluralize } from "@src/util/format.js";
 	import Layout from "./layout.svelte";
+
+	const { checkInsByYear } = data;
 </script>
 
 <Layout>

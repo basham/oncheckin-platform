@@ -1,11 +1,12 @@
 <script>
-	import { h1, org, params, participants } from "@src/data.js";
+	import data from "@src/data.js";
 	import Layout from "@src/pages/orgs/$org/layout.svelte";
 	import Participants from "@src/lib/participants.svelte";
 	import Icon from "@src/lib/icon.svelte";
 	import { sortDesc } from "@src/util/collections.js";
 	import { pluralize } from "@src/util/format.js";
 
+	const { h1, org, params, participants } = data;
 	const location = document.location.toString();
 	const filters = [
 		["Named", "named", "true"],

@@ -1,8 +1,9 @@
 <script>
-	import { h2, event, participant, checkIn } from "@src/data.js";
+	import data from "@src/data.js";
 	import FieldsetCheckIn from "@src/lib/fieldset-check-in.svelte";
 	import Layout from "@src/pages/orgs/$org/events/$event/layout.svelte";
 
+	const { h2, event, participant, checkIn } = data;
 	const { host } = checkIn;
 </script>
 

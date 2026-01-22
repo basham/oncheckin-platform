@@ -1,8 +1,9 @@
 <script>
-	import { h2, event } from "@src/data.js";
+	import data from "@src/data.js";
 	import FieldsetEvent from "@src/lib/fieldset-event.svelte";
 	import Layout from "./layout.svelte";
 
+	const { h2, event } = data;
 	const { name, date } = event;
 </script>
 

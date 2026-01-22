@@ -1,7 +1,9 @@
 <script>
-	import { h1 } from "@src/data.js";
+	import data from "@src/data.js";
 	import FieldsetParticipantName from "@src/lib/fieldset-participant-name.svelte";
 	import Layout from "@src/pages/orgs/$org/layout.svelte";
+
+	const { h1 } = data;
 </script>
 
 <Layout>

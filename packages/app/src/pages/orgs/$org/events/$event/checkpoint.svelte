@@ -1,8 +1,10 @@
 <script>
 	import { SvelteSet } from "svelte/reactivity";
-	import { runners } from "@src/data.js";
+	import data from "@src/data.js";
 	import Icon from "@src/lib/icon.svelte";
 	import Layout from "./layout.svelte";
+
+	const { runners } = data;
 
 	const runnersMap = new Map(
 		runners.map((checkIn) => [checkIn.participant.id, checkIn]),

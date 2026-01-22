@@ -1,9 +1,10 @@
 <script>
-	import { route, org } from "@src/data.js";
+	import data from "@src/data.js";
 	import { APP_NAME } from "@src/constants.js";
 	import NavLink from "@src/lib/nav-link.svelte";
 	import Layout from "@src/pages/page.svelte";
 
+	const { route, org } = data;
 	let { children } = $props();
 	const location = route.split("/").slice(2).join("/");
 	let awarenessCount = $state(-1);

@@ -1,7 +1,9 @@
 <script>
-	import { h1, org, upcomingEvents, recentEvents, years } from "@src/data.js";
+	import data from "@src/data.js";
 	import Layout from "@src/pages/orgs/$org/layout.svelte";
 	import Events from "@src/lib/events.svelte";
+
+	const { h1, org, upcomingEvents, recentEvents, years } = data;
 </script>
 
 <Layout>

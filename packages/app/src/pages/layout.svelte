@@ -1,8 +1,9 @@
 <script>
-	import { h1 } from "@src/data.js";
+	import data from "@src/data.js";
 	import { APP_NAME } from "@src/constants.js";
 	import Layout from "./page.svelte";
 
+	const { h1 } = data;
 	let { children } = $props();
 </script>
 

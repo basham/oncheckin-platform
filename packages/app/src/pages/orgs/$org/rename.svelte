@@ -1,6 +1,8 @@
 <script>
-	import { h1, org } from "@src/data.js";
+	import data from "@src/data.js";
 	import Layout from "@src/pages/orgs/$org/layout.svelte";
+
+	const { h1, org } = data;
 </script>
 
 <Layout>

@@ -1,7 +1,8 @@
 <script>
-	import { code } from "@src/data.js";
+	import data from "@src/data.js";
 	import Layout from "@src/pages/layout.svelte";
 
+	const { code } = data;
 	const { id, name } = code;
 
 	const IDLE = Symbol("idle");

@@ -1,9 +1,10 @@
 <script>
-	import { h1, participants } from "@src/data.js";
+	import data from "@src/data.js";
 	import Layout from "@src/pages/orgs/$org/layout.svelte";
 	import { sortAsc, sortDesc } from "@src/util/collections.js";
 	import { pluralize } from "@src/util/format.js";
 
+	const { h1, participants } = data;
 	const ATTENDS_MIN = 4;
 
 	const results = participants

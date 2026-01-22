@@ -1,8 +1,9 @@
 <script>
-	import { device, account, orgs, _tmp } from "@src/data.js";
+	import data from "@src/data.js";
 	import { sortDesc } from "@src/util/collections.js";
 	import Layout from "@src/pages/layout.svelte";
 
+	const { device, account, orgs, _tmp } = data;
 	const accountClubs = Object.entries(_tmp)
 		.filter(([k]) => k !== "$jazz")
 		.map(([k, v]) => v)

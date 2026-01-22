@@ -1,10 +1,11 @@
 <script>
-	import { h2, participant } from "@src/data.js";
+	import data from "@src/data.js";
 	import Checkbox from "@src/lib/checkbox.svelte";
 	import Fieldset from "@src/lib/fieldset.svelte";
 	import FieldsetParticipantName from "@src/lib/fieldset-participant-name.svelte";
 	import Layout from "./layout.svelte";
 
+	const { h2, participant } = data;
 	const { alias, attendsCount, fullName, location, notes, organizesCount } =
 		participant;
 	let hasAttendsCount = $state(!!attendsCount);

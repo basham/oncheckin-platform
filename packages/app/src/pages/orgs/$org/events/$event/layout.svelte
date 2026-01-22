@@ -1,8 +1,9 @@
 <script>
-	import { route, event } from "@src/data.js";
+	import data from "@src/data.js";
 	import NavLink from "@src/lib/nav-link.svelte";
 	import Layout from "@src/pages/orgs/$org/layout.svelte";
 
+	const { route, event } = data;
 	let { children } = $props();
 	const location = route.split("/")[4];
 </script>
