@@ -1,4 +1,4 @@
-import { Store } from "@src/api/computed/store.js";
+import { Store } from "@src/computed/store.js";
 import { getOrCreate, sortAsc } from "@src/util.js";
 
 export async function get({ data }) {

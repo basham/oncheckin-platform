@@ -1,5 +1,5 @@
 import { deleteCheckIn, setCheckIn } from "@src/api.js";
-import { Store } from "@src/api/computed/store.js";
+import { Store } from "@src/computed/store.js";
 import { encodeCheckInId } from "@src/api/util.js";
 
 export async function get({ data }) {

@@ -1,6 +1,6 @@
 import { isAfter, isBefore, parseISO, sub } from "date-fns";
 import { getOrCreate, sortAsc } from "@src/util.js";
-import { components } from "../components.js";
+import { components } from "@src/api/components.js";
 
 const INVALID_DATE = new Date(NaN);
 const READY_FOR_NAME_COUNT = 6;

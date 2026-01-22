@@ -1,4 +1,4 @@
-import { components } from "../components.js";
+import { components } from "@src/api/components.js";
 
 const DEFAULT_NAME = "(Organization)";
 const PATH = "orgs";

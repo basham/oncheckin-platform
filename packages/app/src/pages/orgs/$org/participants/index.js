@@ -1,4 +1,4 @@
-import { Store } from "@src/api/computed/store.js";
+import { Store } from "@src/computed/store.js";
 
 const namedValues = "all|true|false|ready".split("|");
 const sortValues = "event|runs|hosts|name".split("|");

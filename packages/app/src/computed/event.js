@@ -1,6 +1,6 @@
 import { format, isAfter, isFuture, isPast, isToday, parseISO } from "date-fns";
 import { getOrCreate, sortDesc } from "@src/util.js";
-import { components } from "../components.js";
+import { components } from "@src/api/components.js";
 
 const DEFAULT_NAME = "(Event)";
 const INVALID_DATE = new Date(NaN);

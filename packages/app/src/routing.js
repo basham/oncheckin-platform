@@ -1,5 +1,5 @@
 import { registerRoute as originalRegisterRoute } from "workbox-routing";
-import { Store } from "@src/api/computed/store.js";
+import { Store } from "@src/computed/store.js";
 import { getAccount, getCurrentAccountId, getDevice, hasOrg } from "./api.js";
 import { createIndexHTML } from "./template.js";
 

@@ -1,4 +1,4 @@
-import { Store } from "@src/api/computed/store.js";
+import { Store } from "@src/computed/store.js";
 import { schemaVersion, Entity } from "@src/core";
 import { todayDate } from "@src/util.js";
 
