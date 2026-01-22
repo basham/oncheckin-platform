@@ -1,10 +1,10 @@
-import { Store } from "@src/computed/store.js";
+import { getProjection } from "@src/computed";
 
 export async function get({ data }) {
 	const { org } = data;
 	const h1 = "Participation";
 	const { participants: allParticipants, participationByParticipant } =
-		await Store(org.id);
+		await getProjection(org.id);
 
 	const participants = allParticipants
 		.filter((p) => participationByParticipant.has(p.id))

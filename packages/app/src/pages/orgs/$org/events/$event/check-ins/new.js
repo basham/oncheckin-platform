@@ -1,5 +1,5 @@
 import { createCheckIn, createParticipant } from "@src/api.js";
-import { Store } from "@src/computed/store.js";
+import { getProjection } from "@src/computed";
 
 export async function get({ data }) {
 	const { org, event } = data;
@@ -9,7 +9,7 @@ export async function get({ data }) {
 		participants: allParticipants,
 		checkInsByEventId,
 		checkInsByParticipantId,
-	} = await Store(org.id);
+	} = await getProjection(org.id);
 	const checkIns = checkInsByEventId
 		.get(event.id)
 		.map((checkIn) => [checkIn.participant.id, checkIn]);

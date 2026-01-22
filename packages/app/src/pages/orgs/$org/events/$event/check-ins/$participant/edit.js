@@ -1,12 +1,12 @@
 import { deleteCheckIn, setCheckIn } from "@src/api.js";
-import { Store } from "@src/computed/store.js";
+import { getProjection } from "@src/computed";
 import { encodeCheckInId } from "@src/util/ids.js";
 
 export async function get({ data }) {
 	const { org, event, participant } = data;
 	const h1 = event.name;
 	const h2 = "Edit check-in";
-	const { checkInsById } = await Store(org.id);
+	const { checkInsById } = await getProjection(org.id);
 	const id = encodeCheckInId(participant.id, event.id);
 	const checkIn = checkInsById.get(id);
 	const template = { h1, h2, checkIn };

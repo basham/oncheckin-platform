@@ -1,7 +1,7 @@
-import { Store } from "@src/computed/store.js";
+import { getProjection } from "@src/computed";
 
 export async function get({ data }) {
 	const { org } = data;
-	const { events: json } = await Store(org.id);
+	const { events: json } = await getProjection(org.id);
 	return { json };
 }

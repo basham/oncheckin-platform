@@ -1,4 +1,4 @@
-import { Store } from "@src/computed/store.js";
+import { getProjection } from "@src/computed";
 import { schemaVersion, Entity } from "@src/core";
 
 export async function get() {
@@ -9,7 +9,7 @@ export async function get() {
 
 export async function post({ data, request }) {
 	const { org } = data;
-	const { root } = await Store(org.id);
+	const { root } = await getProjection(org.id);
 	const formData = await request.formData();
 	const name = formData.get("fullName");
 	const nickname = formData.get("alias");

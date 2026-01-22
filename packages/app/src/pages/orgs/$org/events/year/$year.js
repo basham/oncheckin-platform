@@ -1,10 +1,10 @@
-import { Store } from "@src/computed/store.js";
+import { getProjection } from "@src/computed";
 import { getOrCreate, sortAsc } from "@src/util/collections.js";
 
 export async function get({ data }) {
 	const { org, year } = data;
 	const h1 = `Events in ${year}`;
-	const { checkInsByEventId, eventsByYear } = await Store(org.id);
+	const { checkInsByEventId, eventsByYear } = await getProjection(org.id);
 	const events = eventsByYear.get(year);
 	const eventsByParticipantCount = events.reduce((map, event) => {
 		const c = checkInsByEventId.get(event.id).length;

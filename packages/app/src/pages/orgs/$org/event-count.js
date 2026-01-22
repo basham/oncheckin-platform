@@ -1,10 +1,10 @@
 import { setEventCount } from "@src/api.js";
-import { Store } from "@src/computed/store.js";
+import { getProjection } from "@src/computed";
 
 export async function get({ data }) {
 	const { org } = data;
 	const h1 = "Edit event count";
-	const { orgEvent } = await Store(org.id);
+	const { orgEvent } = await getProjection(org.id);
 	const template = { h1, orgEvent };
 	return { template };
 }

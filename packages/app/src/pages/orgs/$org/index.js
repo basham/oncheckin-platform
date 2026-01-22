@@ -1,4 +1,4 @@
-import { Store } from "@src/computed/store.js";
+import { getProjection } from "@src/computed";
 
 export async function get({ data }) {
 	const { org } = data;
@@ -9,7 +9,7 @@ export async function get({ data }) {
 		pastEvents,
 		eventYears: years,
 		participation,
-	} = await Store(org.id);
+	} = await getProjection(org.id);
 	const recentEvents = pastEvents.slice(0, 5);
 	const template = {
 		route,

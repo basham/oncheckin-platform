@@ -1,4 +1,4 @@
-import { Store } from "@src/computed/store.js";
+import { getProjection } from "@src/computed";
 
 const namedValues = "all|true|false|ready".split("|");
 const sortValues = "event|runs|hosts|name".split("|");
@@ -11,7 +11,7 @@ export async function get({ data }) {
 	};
 	const h1 = "Hashers";
 	const { participants: allParticipants, checkInsByParticipantId } =
-		await Store(org.id);
+		await getProjection(org.id);
 
 	const participants = allParticipants
 		.map((p) => {

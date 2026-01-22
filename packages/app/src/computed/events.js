@@ -1,33 +1,15 @@
-import { format, isAfter, isFuture, isPast, isToday, parseISO } from "date-fns";
-import { getOrCreate, sortDesc } from "@src/util/collections.js";
+import { format, isAfter, parseISO } from "date-fns";
+import { sortDesc } from "@src/util/collections.js";
 import { components } from "@src/api/components.js";
 
 const DEFAULT_NAME = "(Event)";
 const INVALID_DATE = new Date(NaN);
 const PATH = "events";
 
-export function getEventData(source) {
-	const events = getEvents(source);
-	const eventsById = getEventsById(events);
-	const pastEvents = getPastEvents(events);
-	const upcomingEvents = getUpcomingEvents(events);
-	const eventsByYear = getEventsByYear(events);
-	const eventYears = getEventYears(eventsByYear);
-	return {
-		...source,
-		events,
-		eventsById,
-		pastEvents,
-		upcomingEvents,
-		eventsByYear,
-		eventYears,
-	};
-}
-
-function getEvents(source) {
+export function compute(source) {
 	const { root } = source;
 	const events = [...Object.values(root.entities)]
-		.map((entity) => getEvent(entity, source))
+		.map((entity) => getEvent(source, entity))
 		.filter((event) => event);
 	const eventCount = getEventCount(source, events);
 	return events.sort(sortDesc("dateObj")).map((event, i) => {
@@ -36,7 +18,7 @@ function getEvents(source) {
 	});
 }
 
-function getEvent(entity, source) {
+function getEvent(source, entity) {
 	const { org } = source;
 	const { event } = entity;
 	if (!event) {
@@ -79,32 +61,4 @@ function getEventCount(source, events) {
 		isAfter(dateObj, date),
 	).length;
 	return count.value + countAfter;
-}
-
-function getEventsById(events) {
-	const entries = events.map((e) => [e.id, e]);
-	return new Map(entries);
-}
-
-function getPastEvents(events) {
-	return events.filter(({ dateObj }) => !isToday(dateObj) && isPast(dateObj));
-}
-
-function getUpcomingEvents(events) {
-	return events
-		.filter(({ dateObj }) => isToday(dateObj) || isFuture(dateObj))
-		.reverse();
-}
-
-function getEventsByYear(events) {
-	return events.reduce((map, event) => {
-		const { year } = event;
-		const yearEvents = getOrCreate(map, year, () => []);
-		yearEvents.unshift(event);
-		return map;
-	}, new Map());
-}
-
-function getEventYears(eventsByYear) {
-	return [...eventsByYear.keys()].sort().reverse();
 }

@@ -1,27 +1,16 @@
 import { sortAsc } from "@src/util/collections.js";
-import { components } from "@src/api/components.js";
 
 const DEFAULT_NAME = "(Participant)";
 
-export function getParticipantData(source) {
-	const participants = getParticipants(source);
-	const participantsById = getParticipantsById(participants);
-	return {
-		...source,
-		participants,
-		participantsById,
-	};
-}
-
-function getParticipants(source) {
+export function compute(source) {
 	const { root } = source;
 	return [...Object.values(root.entities)]
-		.map((entity) => getParticipant(entity, source))
+		.map((entity) => getParticipant(source, entity))
 		.filter((participant) => participant)
 		.sort(sortAsc("displayName"));
 }
 
-function getParticipant(entity, source) {
+function getParticipant(source, entity) {
 	const { org } = source;
 	const { meta, person } = entity;
 	if (!person) {
@@ -43,6 +32,7 @@ function getParticipant(entity, source) {
 		?.get(components.count);
 	*/
 	return {
+		foo: "bar",
 		id,
 		alias,
 		displayName,
@@ -53,9 +43,4 @@ function getParticipant(entity, source) {
 		organizesCount: 0,
 		url,
 	};
-}
-
-function getParticipantsById(participants) {
-	const entries = participants.map((p) => [p.id, p]);
-	return new Map(entries);
 }

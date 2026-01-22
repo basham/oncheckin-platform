@@ -1,79 +1,36 @@
 import { isAfter, isBefore, parseISO, sub } from "date-fns";
-import { getOrCreate, sortAsc } from "@src/util/collections.js";
+import { sortAsc } from "@src/util/collections.js";
 import { components } from "@src/api/components.js";
 
 const INVALID_DATE = new Date(NaN);
 const READY_FOR_NAME_COUNT = 6;
 const RETURNERS_TIME_PERIOD = { months: 2 };
 
-export function getCheckInData(source) {
-	const { store, eventsById, participants } = source;
-	const indexes = getCheckInIndexes(source);
-
-	const aEntries = participants.map((p) => [
+export function compute(source) {
+	const { participants } = source;
+	const entries = participants.map((p) => [
 		p.id,
-		getParticipantCheckIns(source, eventsById, indexes, p),
+		getParticipantCheckIns(source, p),
 	]);
-	const checkInsByParticipantId = new Map(aEntries);
-
-	const bEntries = aEntries
-		.map(([pid, checkIns]) => checkIns)
-		.flat()
-		.map((checkIn) => [checkIn.id, checkIn]);
-	const checkInsById = new Map(bEntries);
-
-	const cEntries = [...eventsById.keys()].map((eid) => {
-		const pidSet = indexes.byEventId.get(eid) || new Set();
-		const pids = [...pidSet.values()]
-			.map((pid) => store.encodeId(pid, eid))
-			.map((id) => checkInsById.get(id))
-			.sort(sortAsc((checkIn) => checkIn.participant.displayName));
-		return [eid, pids];
-	});
-	const checkInsByEventId = new Map(cEntries);
-
-	return {
-		...source,
-		checkInsById,
-		checkInsByEventId,
-		checkInsByParticipantId,
-	};
+	return new Map(entries);
 }
 
-function getCheckInIndexes(source) {
-	const { root } = source;
-	const byCheckInId = new Map();
-	const byEventId = new Map();
-	const byParticipantId = new Map();
-
-	for (const entity of [...Object.values(root.entities)]) {
-		/*
-		if (entity.has(components.rel) && entity.has(components.attends)) {
-			const { source: pid, target: eid } = entity.get(components.rel);
-			byCheckInId.set(entity.id, entity);
-			getOrCreate(byEventId, eid, () => new Set()).add(pid);
-			getOrCreate(byParticipantId, pid, () => new Set()).add(eid);
-		}
-		*/
-	}
-
-	return { byCheckInId, byEventId, byParticipantId };
-}
-
-function getParticipantCheckIns(store, eventsById, indexes, participant) {
+function getParticipantCheckIns(source, participant) {
+	const { checkInIndexes: indexes, eventsById } = source;
 	const eventIds = indexes.byParticipantId.get(participant.id);
+
 	if (!eventIds?.size) {
 		return [];
 	}
 
 	let attendsCount = getInitAttendsCount(
-		store,
+		source,
 		eventIds,
 		eventsById,
 		participant,
 	);
 	let organizesCount = getInitOrganizesCount(
-		store,
+		source,
 		eventIds,
 		eventsById,
 		participant,
@@ -85,7 +42,7 @@ function getParticipantCheckIns(store, eventsById, indexes, participant) {
 		.map((eid) => eventsById.get(eid))
 		.sort(sortAsc(({ count }) => count))
 		.map((event) => {
-			const id = store.encodeId(participant.id, event.id);
+			const id = source.encodeId(participant.id, event.id);
 			const entity = indexes.byCheckInId.get(id);
 			const host = entity.has(components.organizes);
 			attendsCount += 1;
@@ -125,8 +82,8 @@ function getParticipantCheckIns(store, eventsById, indexes, participant) {
 		.reverse();
 }
 
-function getInitAttendsCount(store, eventIds, eventsById, participant) {
-	const entity = store.getEntity(participant.id, components.attends);
+function getInitAttendsCount(source, eventIds, eventsById, participant) {
+	const entity = source.getEntity(participant.id, components.attends);
 	if (!entity) {
 		return 0;
 	}
@@ -139,18 +96,18 @@ function getInitAttendsCount(store, eventIds, eventsById, participant) {
 }
 
 function getInitOrganizesCount(
-	store,
+	source,
 	eventIds,
 	eventsById,
 	participant,
 	indexes,
 ) {
-	const entity = store.getEntity(participant.id, components.organizes);
+	const entity = source.getEntity(participant.id, components.organizes);
 	if (!entity) {
 		return 0;
 	}
 	const organizes = [...eventIds].filter((eid) => {
-		const checkInId = store.encodeId(participant.id, eid);
+		const checkInId = source.encodeId(participant.id, eid);
 		return indexes.byCheckInId.get(checkInId).has(components.organizes);
 	});
 	const count = entity.get(components.count);

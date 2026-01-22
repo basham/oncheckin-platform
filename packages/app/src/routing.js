@@ -1,5 +1,5 @@
 import { registerRoute as originalRegisterRoute } from "workbox-routing";
-import { Store } from "@src/computed/store.js";
+import { getProjection } from "@src/computed";
 import { getAccount, getCurrentAccountId, getDevice, hasOrg } from "./api.js";
 import { createIndexHTML } from "./template.js";
 
@@ -79,13 +79,13 @@ async function getParams(source = {}) {
 async function getOrgFromParams(key, { org: oid }) {
 	//const accountId = await getCurrentAccountId();
 	//if (await hasOrg(accountId, oid)) {
-		const { org } = await Store(oid);
+		const { org } = await getProjection(oid);
 		return [key, org];
 	//}
 }
 
 async function getEventFromParams(key, { org: oid, event: eid }) {
-	const { eventsById } = await Store(oid);
+	const { eventsById } = await getProjection(oid);
 	if (eventsById.has(eid)) {
 		const event = eventsById.get(eid);
 		return [key, event];
@@ -93,7 +93,7 @@ async function getEventFromParams(key, { org: oid, event: eid }) {
 }
 
 async function getParticipantFromParams(key, { org: oid, participant: pid }) {
-	const { participantsById } = await Store(oid);
+	const { participantsById } = await getProjection(oid);
 	if (participantsById.has(pid)) {
 		const participant = participantsById.get(pid);
 		return [key, participant];

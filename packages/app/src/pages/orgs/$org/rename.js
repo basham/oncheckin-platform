@@ -1,4 +1,4 @@
-import { Store } from "@src/computed/store.js";
+import { getProjection } from "@src/computed";
 
 export async function get() {
 	const h1 = "Rename organization";
@@ -8,7 +8,7 @@ export async function get() {
 
 export async function post({ data, request }) {
 	const { org } = data;
-	const { root } = await Store(org.id);
+	const { root } = await getProjection(org.id);
 	const formData = await request.formData();
 	const name = formData.get("name");
 	root.meta.$jazz.set("name", name);

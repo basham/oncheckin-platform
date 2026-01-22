@@ -1,4 +1,4 @@
-import { Store } from "@src/computed/store.js";
+import { getProjection } from "@src/computed";
 import { schemaVersion, Entity } from "@src/core";
 import { todayDate } from "@src/util/format.js";
 
@@ -11,7 +11,7 @@ export async function get() {
 
 export async function post({ data, request }) {
 	const { org } = data;
-	const { root } = await Store(org.id);
+	const { root } = await getProjection(org.id);
 	const formData = await request.formData();
 	const name = formData.get("name");
 	const date = formData.get("date");
