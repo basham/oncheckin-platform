@@ -1,5 +1,5 @@
 import { Store } from "@src/api/computed/store.js";
-import { schemaVersion, Entity } from "@src/api-jazz";
+import { schemaVersion, Entity } from "@src/core";
 import { todayDate } from "@src/util.js";
 
 export async function get() {

@@ -5,7 +5,7 @@ import {
 	renameDevice,
 	setCurrentAccount,
 } from "@src/api.js";
-import { getContext } from "@src/api-jazz";
+import { getContext } from "@src/core";
 
 const orgsPath = "/orgs/";
 

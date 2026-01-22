@@ -1,6 +1,6 @@
 <script>
 	import { onMount } from "svelte";
-	import { createPasskeyAuth } from "@src/api-jazz/auth.ts";
+	import { createPasskeyAuth } from "@src/core/auth.ts";
 	import { getInstallStatus } from "@src/util.js";
 	import Layout from "./layout.svelte";
 

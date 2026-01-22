@@ -5,7 +5,7 @@ import { getEventData } from "./event.js";
 import { getOrgData } from "./org.js";
 import { getParticipantData } from "./participant.js";
 import { getParticipationData } from "./participation.js";
-import { getContext, Root } from "@src/api-jazz";
+import { getContext, Root } from "@src/core";
 
 const cache = new Map();
 

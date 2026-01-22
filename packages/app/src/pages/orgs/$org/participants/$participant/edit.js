@@ -1,4 +1,4 @@
-import { Entity } from "@src/api-jazz";
+import { Entity } from "@src/core";
 import { setParticipant } from "@src/api.js";
 
 export async function get({ data }) {

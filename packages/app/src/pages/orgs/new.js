@@ -1,4 +1,4 @@
-import { getContext, schemaVersion, now, Entity, Root } from "@src/api-jazz";
+import { getContext, schemaVersion, now, Entity, Root } from "@src/core";
 
 export async function get() {
 	const h1 = "New organization";

@@ -1,5 +1,5 @@
 import { getOrgs } from "@src/api.js";
-import { getContext } from "@src/api-jazz";
+import { getContext } from "@src/core";
 
 export async function get({ data }) {
 	const context = await getContext();

@@ -1,4 +1,4 @@
-import { Entity } from "@src/api-jazz";
+import { Entity } from "@src/core";
 
 export async function get({ data }) {
 	const { event } = data;
