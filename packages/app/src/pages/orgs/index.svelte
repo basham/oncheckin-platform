@@ -1,6 +1,6 @@
 <script>
 	import { device, account, orgs, _tmp } from "@src/data.js";
-	import { sortDesc } from "@src/util.js";
+	import { sortDesc } from "@src/util/collections.js";
 	import Layout from "@src/pages/layout.svelte";
 
 	const accountClubs = Object.entries(_tmp)

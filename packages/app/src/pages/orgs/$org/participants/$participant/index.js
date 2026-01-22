@@ -1,5 +1,5 @@
 import { Store } from "@src/computed/store.js";
-import { getOrCreate } from "@src/util.js";
+import { getOrCreate } from "@src/util/collections.js";
 
 export async function get({ data }) {
 	const { org, participant } = data;

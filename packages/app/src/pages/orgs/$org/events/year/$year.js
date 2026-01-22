@@ -1,5 +1,5 @@
 import { Store } from "@src/computed/store.js";
-import { getOrCreate, sortAsc } from "@src/util.js";
+import { getOrCreate, sortAsc } from "@src/util/collections.js";
 
 export async function get({ data }) {
 	const { org, year } = data;

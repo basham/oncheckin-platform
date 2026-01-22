@@ -1,5 +1,5 @@
 import { isAfter, subYears } from "date-fns";
-import { getOrCreate } from "@src/util.js";
+import { getOrCreate } from "@src/util/collections.js";
 
 const ATTENDS_INDEX = 0;
 const ORGANIZES_INDEX = 1;

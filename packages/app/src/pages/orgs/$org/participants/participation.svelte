@@ -1,7 +1,8 @@
 <script>
 	import { h1, participants } from "@src/data.js";
 	import Layout from "@src/pages/orgs/$org/layout.svelte";
-	import { pluralize, sortAsc, sortDesc } from "@src/util.js";
+	import { sortAsc, sortDesc } from "@src/util/collections.js";
+	import { pluralize } from "@src/util/format.js";
 
 	const ATTENDS_MIN = 4;
 

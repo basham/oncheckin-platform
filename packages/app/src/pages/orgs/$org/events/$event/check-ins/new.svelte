@@ -1,7 +1,7 @@
 <script>
 	import StringComparison from "hermetrics/dist/hermetrics/jaro_winkler.js";
 	import { h2, event, participants } from "@src/data.js";
-	import { focus } from "@src/util.js";
+	import { focus } from "@src/util/dom.js";
 	import Fieldset from "@src/lib/fieldset.svelte";
 	import FieldsetCheckIn from "@src/lib/fieldset-check-in.svelte";
 	import FieldsetParticipantName from "@src/lib/fieldset-participant-name.svelte";

@@ -1,4 +1,4 @@
-import { getOrCreate } from "@src/util.js";
+import { getOrCreate } from "@src/util/collections.js";
 import { isComponent, isIdValid } from "./components.js";
 import { createId, createYMap, createRemoteStore } from "./store.js";
 

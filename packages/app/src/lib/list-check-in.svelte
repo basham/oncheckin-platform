@@ -1,5 +1,5 @@
 <script>
-	import { pluralize } from "@src/util.js";
+	import { pluralize } from "@src/util/format.js";
 
 	let {
 		checkIns = [],

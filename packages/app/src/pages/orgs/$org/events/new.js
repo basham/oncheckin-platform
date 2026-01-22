@@ -1,6 +1,6 @@
 import { Store } from "@src/computed/store.js";
 import { schemaVersion, Entity } from "@src/core";
-import { todayDate } from "@src/util.js";
+import { todayDate } from "@src/util/format.js";
 
 export async function get() {
 	const h1 = "New event";

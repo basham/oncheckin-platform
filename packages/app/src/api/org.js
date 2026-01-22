@@ -1,4 +1,4 @@
-import { getOrCreate, setMapFromObject } from "@src/util.js";
+import { getOrCreate, setMapFromObject } from "@src/util/collections.js";
 import { components } from "./components.js";
 import { loadStore } from "./entity.js";
 import { createYMap } from "./store.js";

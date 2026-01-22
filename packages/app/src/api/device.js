@@ -1,4 +1,4 @@
-import { getOrCreate } from "@src/util.js";
+import { getOrCreate } from "@src/util/collections.js";
 import { cache, createId, createYMap, createLocalStore } from "./store.js";
 
 export async function addAccount(id) {

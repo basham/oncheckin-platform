@@ -1,5 +1,5 @@
 <script>
-	import { getInstallStatus } from "@src/util.js";
+	import { getInstallStatus } from "@src/util/dom.js";
 	import Layout from "./layout.svelte";
 
 	const { isInstalled } = getInstallStatus();

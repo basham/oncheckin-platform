@@ -1,7 +1,7 @@
 <script>
 	import { onMount } from "svelte";
 	import { createPasskeyAuth } from "@src/core/auth.ts";
-	import { getInstallStatus } from "@src/util.js";
+	import { getInstallStatus } from "@src/util/dom.js";
 	import Layout from "./layout.svelte";
 
 	const { isInstalled } = getInstallStatus();

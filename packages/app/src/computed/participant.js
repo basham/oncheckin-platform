@@ -1,4 +1,4 @@
-import { sortAsc } from "@src/util.js";
+import { sortAsc } from "@src/util/collections.js";
 import { components } from "@src/api/components.js";
 
 const DEFAULT_NAME = "(Participant)";

@@ -1,6 +1,6 @@
 import { deleteCheckIn, setCheckIn } from "@src/api.js";
 import { Store } from "@src/computed/store.js";
-import { encodeCheckInId } from "@src/api/util.js";
+import { encodeCheckInId } from "@src/util/ids.js";
 
 export async function get({ data }) {
 	const { org, event, participant } = data;

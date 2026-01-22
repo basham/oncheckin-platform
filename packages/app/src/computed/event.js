@@ -1,5 +1,5 @@
 import { format, isAfter, isFuture, isPast, isToday, parseISO } from "date-fns";
-import { getOrCreate, sortDesc } from "@src/util.js";
+import { getOrCreate, sortDesc } from "@src/util/collections.js";
 import { components } from "@src/api/components.js";
 
 const DEFAULT_NAME = "(Event)";

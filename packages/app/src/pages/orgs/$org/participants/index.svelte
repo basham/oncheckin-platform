@@ -3,7 +3,8 @@
 	import Layout from "@src/pages/orgs/$org/layout.svelte";
 	import Participants from "@src/lib/participants.svelte";
 	import Icon from "@src/lib/icon.svelte";
-	import { pluralize, sortDesc } from "@src/util.js";
+	import { sortDesc } from "@src/util/collections.js";
+	import { pluralize } from "@src/util/format.js";
 
 	const location = document.location.toString();
 	const filters = [

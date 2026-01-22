@@ -1,6 +1,6 @@
 <script>
 	import { route, participant, latestCheckIn } from "@src/data.js";
-	import { pluralize } from "@src/util.js";
+	import { pluralize } from "@src/util/format.js";
 	import NavLink from "@src/lib/nav-link.svelte";
 	import Layout from "@src/pages/orgs/$org/layout.svelte";
 

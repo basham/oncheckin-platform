@@ -2,8 +2,9 @@ import { createId as createCuid } from "@paralleldrive/cuid2";
 import * as Y from "yjs";
 import { IndexeddbPersistence, storeState } from "y-indexeddb";
 import { WebsocketProvider } from "y-websocket";
+import { debounce } from "@src/util/async.js";
+import { getOrCreate } from "@src/util/collections.js";
 import { APP_ID, SERVER_URL } from "../constants.js";
-import { debounce, getOrCreate } from "../util.js";
 
 export { Y };
 

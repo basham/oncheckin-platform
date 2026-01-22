@@ -1,6 +1,6 @@
 <script>
 	import { checkInsByYear } from "@src/data.js";
-	import { pluralize } from "@src/util.js";
+	import { pluralize } from "@src/util/format.js";
 	import Layout from "./layout.svelte";
 </script>
 

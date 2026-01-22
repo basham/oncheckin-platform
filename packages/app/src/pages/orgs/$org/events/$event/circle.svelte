@@ -1,6 +1,6 @@
 <script>
 	import { checkIns } from "@src/data.js";
-	import { sortAsc, sortDesc } from "@src/util.js";
+	import { sortAsc, sortDesc } from "@src/util/collections.js";
 	import CheckInList from "@src/lib/list-check-in.svelte";
 	import Layout from "./layout.svelte";
 
