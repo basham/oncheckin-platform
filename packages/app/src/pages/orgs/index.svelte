@@ -1,13 +1,8 @@
 <script>
 	import data from "@src/data.js";
-	import { sortDesc } from "@src/util/collections.js";
 	import Layout from "@src/pages/layout.svelte";
 
-	const { device, account, orgs, _tmp } = data;
-	const accountClubs = Object.entries(_tmp)
-		.filter(([k]) => k !== "$jazz")
-		.map(([k, v]) => v)
-		.sort(sortDesc((v) => v.meta.lastViewedAt));
+	const { accountClubs, device, account } = data;
 </script>
 
 <Layout>
@@ -27,19 +22,6 @@
 							<div>{`ID: ${ac.club.root.$jazz.id.slice(-4)}`}</div>
 							<div>{`Last opened: ${ac.meta.lastViewedAt}`}</div>
 						</div>
-					</a>
-				</li>
-			{/each}
-		</ul>
-	{/if}
-	{#if orgs.length}
-		<h2>All organizations</h2>
-		<ul class="list-plain u-gap-2px u-m-top-2">
-			{#each orgs as org}
-				<li class="row">
-					<a class="row__content" href={org.url}>
-						<span class="row__primary">{org.name}</span>
-						<span class="row__secondary">{`ID: ${org.id}`}</span>
 					</a>
 				</li>
 			{/each}

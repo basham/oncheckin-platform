@@ -1,6 +1,5 @@
 import { isAfter, isBefore, parseISO, sub } from "date-fns";
 import { sortAsc } from "@src/util/collections.js";
-import { components } from "@src/api/components.js";
 
 const INVALID_DATE = new Date(NaN);
 const READY_FOR_NAME_COUNT = 6;
@@ -82,6 +81,7 @@ function getParticipantCheckIns(source, participant) {
 
 function getInitAttendsCount(source, eventIds, eventsById, participant) {
 	return 0;
+	/*
 	const entity = source.getEntity(participant.id, components.attends);
 	if (!entity) {
 		return 0;
@@ -92,6 +92,7 @@ function getInitAttendsCount(source, eventIds, eventsById, participant) {
 		.map((eid) => eventsById.get(eid))
 		.filter(({ dateObj }) => isAfter(dateObj, date)).length;
 	return count.value + countAfter - eventIds.size;
+	*/
 }
 
 function getInitOrganizesCount(
@@ -102,6 +103,7 @@ function getInitOrganizesCount(
 	indexes,
 ) {
 	return 0;
+	/*
 	const entity = source.getEntity(participant.id, components.organizes);
 	if (!entity) {
 		return 0;
@@ -116,6 +118,7 @@ function getInitOrganizesCount(
 		.map((eid) => eventsById.get(eid))
 		.filter(({ dateObj }) => isAfter(dateObj, date)).length;
 	return count.value + countAfter - organizes.length;
+	*/
 }
 
 function isSpecial(value) {

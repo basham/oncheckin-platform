@@ -1,11 +1,9 @@
-import { getOrgs } from "@src/api.js";
 import { getContext } from "@src/core";
+import { sortDesc } from "@src/util/collections.js";
 
-export async function get({ data }) {
+export async function get() {
 	const context = await getContext();
 	const h1 = "Organizations";
-	const { account } = data;
-	const orgs = await getOrgs(account.id);
 	const me = await context.me.$jazz.ensureLoaded({
 		resolve: {
 			root: {
@@ -22,7 +20,10 @@ export async function get({ data }) {
 			},
 		},
 	});
-	const _tmp = me.root.entities;
-	const template = { h1, orgs, _tmp };
+	const accountClubs = Object.entries(me.root.entities)
+		.filter(([k]) => k !== "$jazz")
+		.map(([k, v]) => v)
+		.sort(sortDesc((v) => v.meta.lastViewedAt));
+	const template = { h1, accountClubs };
 	return { template };
 }

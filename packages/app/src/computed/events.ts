@@ -1,6 +1,5 @@
 import { format, isAfter, parseISO } from "date-fns";
 import { sortDesc } from "@src/util/collections.js";
-import { components } from "@src/api/components.js";
 
 const DEFAULT_NAME = "(Event)";
 const INVALID_DATE = new Date(NaN);

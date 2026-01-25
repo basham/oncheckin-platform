@@ -4,5 +4,6 @@ export * from "./createEvent.ts";
 export * from "./createPerson.ts";
 export * from "./deleteCheckIn.ts";
 export * from "./editCheckIn.ts";
+export * from "./editClub.ts";
 export * from "./editEvent.ts";
 export * from "./editPerson.ts";
