@@ -16,35 +16,35 @@ export function compute(source) {
 }
 
 function getParticipantCheckIns(source, participant) {
-	const { checkInIndexes: indexes, eventsById } = source;
-	const eventIds = indexes.byParticipantId.get(participant.id);
+	const { checkInIndexes, eventsById } = source;
+	const eventCheckIns = checkInIndexes.byParticipantId.get(participant.id);
 
-	if (!eventIds?.size) {
+	if (!eventCheckIns?.size) {
 		return [];
 	}
 
 	let attendsCount = getInitAttendsCount(
 		source,
-		eventIds,
+		eventCheckIns,
 		eventsById,
 		participant,
 	);
 	let organizesCount = getInitOrganizesCount(
 		source,
-		eventIds,
+		eventCheckIns,
 		eventsById,
 		participant,
-		indexes,
+		checkInIndexes,
 	);
 	let lastEvent = null;
 
-	return [...eventIds]
-		.map((eid) => eventsById.get(eid))
+	return [...eventCheckIns.keys()]
+		.map((eventId) => eventsById.get(eventId))
 		.sort(sortAsc(({ count }) => count))
 		.map((event) => {
-			const id = source.encodeId(participant.id, event.id);
-			const entity = indexes.byCheckInId.get(id);
-			const host = entity.has(components.organizes);
+			const id = eventCheckIns.get(event.id);
+			const entity = checkInIndexes.byCheckInId.get(id);
+			const host = entity.checkin.role === "organizer";
 			attendsCount += 1;
 			organizesCount += host ? 1 : 0;
 			const runCount = attendsCount;
@@ -81,6 +81,7 @@ function getParticipantCheckIns(source, participant) {
 }
 
 function getInitAttendsCount(source, eventIds, eventsById, participant) {
+	return 0;
 	const entity = source.getEntity(participant.id, components.attends);
 	if (!entity) {
 		return 0;
@@ -100,6 +101,7 @@ function getInitOrganizesCount(
 	participant,
 	indexes,
 ) {
+	return 0;
 	const entity = source.getEntity(participant.id, components.organizes);
 	if (!entity) {
 		return 0;

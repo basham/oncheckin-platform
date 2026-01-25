@@ -19,7 +19,9 @@ export async function getProjection(rootId) {
 				entities: {
 					$each: {
 						meta: true,
+						checkin: true,
 						event: true,
+						link: true,
 						person: true,
 					},
 				},

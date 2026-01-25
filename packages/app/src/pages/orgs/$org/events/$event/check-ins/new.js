@@ -1,4 +1,4 @@
-import { createCheckIn, createParticipant } from "@src/api.js";
+import { createCheckIn, createPerson } from "@src/actions";
 import { getProjection } from "@src/computed";
 
 export async function get({ data }) {
@@ -30,20 +30,21 @@ export async function get({ data }) {
 }
 
 export async function post({ data, request }) {
-	const { org, event } = data;
+	const { id: clubId } = data.org;
+	const { id: eventId } = data.event;
 	const formData = await request.formData();
 	const checkInType = formData.get("checkInType");
-	let participantId = formData.get("selectedParticipant");
+	let personId = formData.get("selectedParticipant");
 	if (checkInType === "new-participant") {
-		const personName = formData.get("fullName");
-		const memberName = formData.get("alias");
-		const participant = await createParticipant(org.id, {
-			personName,
-			memberName,
-		});
-		participantId = participant.id;
+		const name = formData.get("fullName");
+		const nickname = formData.get("alias");
+		const props = { clubId, name, nickname };
+		const person = await createPerson(props);
+		personId = person.id;
 	}
-	const organizes = formData.get("host");
-	await createCheckIn(org.id, participantId, event.id, { organizes });
-	return { redirect: event.url };
+	const organizer = formData.get("host");
+	const role = organizer ? "organizer" : "participant";
+	const props = { clubId, eventId, personId, role };
+	const { url: redirect } = await createCheckIn(props);
+	return { redirect };
 }
