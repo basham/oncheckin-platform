@@ -9,7 +9,7 @@ export function debounce(fn, timeout = 100) {
 }
 
 export function delay(ms) {
-	return new Promise((resolve) => {
+	return new Promise<void>((resolve) => {
 		setTimeout(() => resolve(), ms);
 	});
 }
