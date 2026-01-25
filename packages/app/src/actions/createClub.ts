@@ -1,6 +1,7 @@
 import { getContext, schemaVersion, now, Entity, Root } from "@src/core";
 
-export async function createClub({ name }) {
+export async function createClub(props) {
+	const { name } = props;
 	const context = await getContext();
 	const club = Root.create({
 		meta: {

@@ -1,5 +1,4 @@
-import { getProjection } from "@src/computed";
-import { schemaVersion, Entity } from "@src/core";
+import { createEvent } from "@src/actions";
 import { todayDate } from "@src/util/format.js";
 
 export async function get() {
@@ -10,21 +9,10 @@ export async function get() {
 }
 
 export async function post({ data, request }) {
-	const { org } = data;
-	const { root } = await getProjection(org.id);
+	const { id: clubId } = data.org;
 	const formData = await request.formData();
 	const name = formData.get("name");
-	const date = formData.get("date");
-	const event = Entity.create({
-		meta: {
-			name,
-			schemaVersion,
-		},
-		event: {
-			startsAt: date,
-		},
-	});
-	root.entities.$jazz.set(event.$jazz.id, event);
-	const redirect = `orgs/${root.$jazz.id}/event/${event.$jazz.id}/`;
+	const startsAt = formData.get("date");
+	const { url: redirect } = await createEvent({ clubId, name, startsAt });
 	return { redirect };
 }

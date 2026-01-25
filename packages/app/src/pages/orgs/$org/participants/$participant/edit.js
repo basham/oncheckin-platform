@@ -1,5 +1,4 @@
-import { Entity } from "@src/core";
-import { setParticipant } from "@src/api.js";
+import { editPerson } from "@src/actions";
 
 export async function get({ data }) {
 	const { participant } = data;
@@ -10,21 +9,14 @@ export async function get({ data }) {
 }
 
 export async function post({ data, request }) {
-	const { participant } = data;
+	const { id: clubId } = data.org;
+	const { id: personId } = data.participant;
 	const formData = await request.formData();
 	const name = formData.get("fullName");
 	const nickname = formData.get("alias");
 	const location = formData.get("location");
 	const description = formData.get("notes");
-	const entity = await Entity.load(participant.id, {
-		resolve: {
-			meta: true,
-			person: true,
-		},
-	});
-	entity.meta.$jazz.set("name", name);
-	entity.meta.$jazz.set("description", description);
-	entity.person.$jazz.set("nickname", nickname);
-	const { url: redirect } = participant;
+	const props = { clubId, personId, name, description, nickname };
+	const { url: redirect } = await editPerson(props);
 	return { redirect };
 }

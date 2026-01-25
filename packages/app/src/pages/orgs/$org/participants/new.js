@@ -1,5 +1,4 @@
-import { getProjection } from "@src/computed";
-import { schemaVersion, Entity } from "@src/core";
+import { createPerson } from "@src/actions";
 
 export async function get() {
 	const h1 = "New hasher";
@@ -8,21 +7,11 @@ export async function get() {
 }
 
 export async function post({ data, request }) {
-	const { org } = data;
-	const { root } = await getProjection(org.id);
+	const { id: clubId } = data.org;
 	const formData = await request.formData();
 	const name = formData.get("fullName");
 	const nickname = formData.get("alias");
-	const person = Entity.create({
-		meta: {
-			name,
-			schemaVersion,
-		},
-		person: {
-			nickname,
-		},
-	});
-	root.entities.$jazz.set(person.$jazz.id, person);
-	const redirect = `orgs/${root.$jazz.id}/participants/${person.$jazz.id}/`;
+	const props = { clubId, name, nickname };
+	const { url: redirect } = await createPerson(props);
 	return { redirect };
 }

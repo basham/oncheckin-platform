@@ -1,1 +1,4 @@
-export * from "./createClub.js";
+export * from "./createClub.ts";
+export * from "./createEvent.ts";
+export * from "./createPerson.ts";
+export * from "./editEvent.ts";
