@@ -4,8 +4,9 @@
 		"paths": {
 			"@src/*": ["src/*"]
 		},
+		"module": "esnext",
 		"moduleResolution": "bundler",
-		"target": "ESNext",
+		"target": "esnext",
 		"allowImportingTsExtensions": true,
 		"noEmit": true
 	}

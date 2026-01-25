@@ -51,6 +51,7 @@ function getEvent(source, entity) {
 
 function getEventCount(source, events) {
 	return events.length;
+	/*
 	const entity = store.getEntity(components.org, components.event);
 	if (!entity) {
 		return events.length;
@@ -61,4 +62,5 @@ function getEventCount(source, events) {
 		isAfter(dateObj, date),
 	).length;
 	return count.value + countAfter;
+	*/
 }

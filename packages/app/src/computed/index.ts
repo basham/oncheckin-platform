@@ -1,7 +1,13 @@
 import { getContext, Root } from "@src/core";
 import { getOrCreate } from "@src/util/collections.js";
 
-const modules = import.meta.glob("./!(index).js", { eager: true });
+declare global {
+	interface ImportMeta {
+		glob<T = any>(pattern: string, options?: { eager?: boolean; as?: string }): Record<string, T>;
+	}
+}
+
+const modules = import.meta.glob("./!(index).ts", { eager: true });
 const projections = new Map();
 
 export async function getProjection(rootId) {
@@ -32,7 +38,11 @@ export async function getProjection(rootId) {
 		};
 
 		init();
-		const unsubscribe = root.$jazz.subscribe(init);
+		/*
+		if (root.$jazz.loadingState === "ready") {
+			const unsubscribe = root.$jazz.subscribe(init);
+		}
+		*/
 		return projection;
 	});
 }
