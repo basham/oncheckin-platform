@@ -1,5 +1,4 @@
-import { editCheckIn } from "@src/actions";
-import { deleteCheckIn } from "@src/api.js";
+import { deleteCheckIn, editCheckIn } from "@src/actions";
 import { getProjection } from "@src/computed";
 
 export async function get({ data }) {

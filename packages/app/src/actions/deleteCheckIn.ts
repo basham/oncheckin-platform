@@ -4,7 +4,7 @@ import { Entity } from "@src/core";
 
 export async function deleteCheckIn(props) {
 	const { clubId, eventId, personId } = props;
-	const { checkInIndexes } = await getProjection(clubId);
+	const { checkInIndexes, root } = await getProjection(clubId);
 	const checkInId = checkInIndexes.byEventId.get(eventId).get(personId);
 	await deleteCoValues(Entity, checkInId, {
 		resolve: {
@@ -13,6 +13,5 @@ export async function deleteCheckIn(props) {
 			link: true,
 		}
 	});
-	const { root } = await getProjection(clubId);
 	root.entities.$jazz.delete(checkInId);
 }
