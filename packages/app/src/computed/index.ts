@@ -3,7 +3,10 @@ import { getOrCreate } from "@src/util/collections.js";
 
 declare global {
 	interface ImportMeta {
-		glob<T = any>(pattern: string, options?: { eager?: boolean; as?: string }): Record<string, T>;
+		glob<T = any>(
+			pattern: string,
+			options?: { eager?: boolean; as?: string },
+		): Record<string, T>;
 	}
 }
 

@@ -11,7 +11,7 @@ export async function deleteCheckIn(props) {
 			meta: true,
 			checkin: true,
 			link: true,
-		}
+		},
 	});
 	root.entities.$jazz.delete(checkInId);
 }
